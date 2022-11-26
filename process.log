@@ -1,0 +1,26 @@
+System details:uptime
+
+System details:ps
+
+System details:uname -rs
+
+System details:sleep 3
+
+System details:date
+
+System details:echo "Thank you"
+
+ 21:26:18 up  2:12,  0 users,  load average: 0.52, 0.58, 0.59
+
+  PID TTY          TIME CMD
+    8 tty1     00:00:00 bash
+   65 tty1     00:00:00 bash
+   67 tty1     00:00:00 ps
+
+Linux 4.4.0-19041-Microsoft
+
+
+Fri Nov 18 21:26:21 IST 2022
+
+Thank you
+

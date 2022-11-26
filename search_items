@@ -1,0 +1,10 @@
+root:x:bin:bash
+bash:x:bin
+userA:bash
+bash:
+bash,
+userB:bash
+bash
+bash
+ bash
+unix bash shell 

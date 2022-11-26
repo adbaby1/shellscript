@@ -1,0 +1,8 @@
+ 11:01:53 up  4:38,  0 users,  load average: 0.52, 0.58, 0.59
+  PID TTY          TIME CMD
+    8 tty1     00:00:00 bash
+  121 tty1     00:00:00 bash
+  124 tty1     00:00:00 ps
+Linux 4.4.0-19041-Microsoft
+Sat Nov 19 11:01:56 IST 2022
+Thank you

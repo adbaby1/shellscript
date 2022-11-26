@@ -1,0 +1,6 @@
+uptime
+ps
+uname -rs
+sleep 3
+date
+echo "Thank you"
