@@ -1,0 +1,5014 @@
+command with command style:=
+
+
+1.command `command` or command $(command)
+
+date +%D
+
+Eg. for comamnd with argument:
+
+[adbaby@ADBABY-IN ~]$ echo "Today's Date is: `date +%D`"
+Today's Date is: 10/31/22
+[adbaby@ADBABY-IN ~]$
+
+
+Eg. for compound style:
+
+[adbaby@ADBABY-IN ~]$ echo "Today's Date is: $(date +%D)"
+Today's Date is: 10/31/22
+[adbaby@ADBABY-IN ~]$
+
+
+[adbaby@ADBABY-IN ~]$ Date=`date +%D`
+[adbaby@ADBABY-IN ~]$
+
+[adbaby@ADBABY-IN ~]$ echo "${Date}"
+10/31/22
+[adbaby@ADBABY-IN ~]$
+
+[adbaby@ADBABY-IN ~]$ echo "Today the date is: ${Date}"
+Today the date is: 10/31/22
+[adbaby@ADBABY-IN ~]$
+
+[adbaby@ADBABY-IN ~]$ name=`whoami`
+[adbaby@ADBABY-IN ~]$ echo "My name is $name"
+My name is adbaby
+[adbaby@ADBABY-IN ~]$
+
+
+[adbaby@ADBABY-IN ~]$ count="`ps -ef | wc -l`"
+[adbaby@ADBABY-IN ~]$ echo "Total No. of Process is: $count"
+Total No. of Process is: 7
+[adbaby@ADBABY-IN ~]$
+
+
+
+
+echo -e -- -e option is for enable escape character.
+
+[adbaby@ADBABY-IN ~]$ echo "server1
+> server2
+> server3
+> server4
+> "
+server1
+server2
+server3
+server4
+
+[adbaby@ADBABY-IN ~]$ echo -e "server1\nserver2\nserver3\n"
+server1
+server2
+server3
+
+[adbaby@ADBABY-IN ~]$
+
+
+
+
+Write a shell program to display app, service and port number:
+
+read -p command is used to take the dynamic input from Keyboard.
+
+-p is for prompt message
+
+syntax:
+----------\\
+
+read -p "prompt message:" <variable=>
+
+
+read -p "Enter your file name:" fname
+echo "about $fname details
+---------------------------------------"
+
+
+Shell Variables:-
+=================
+env -- lt will list of all exported variables.
+
+
+
+
+
+shell variables:
+===================
+
+1. Current working shell is $0
+
+[adbaby@ADBABY-IN shell_program]$ echo $0
+-bash
+[adbaby@ADBABY-IN shell_program]$ 
+
+2. Default shell is $SHELL
+
+[adbaby@ADBABY-IN shell_program]$echo $SHELL
+/bin/bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+3. command path is $PATH
+
+[adbaby@ADBABY-IN shell_program]$ echo $PATH
+/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/anaconda3/bin:/usr/local/mongodb/bin:/home/adbaby/.local/bin:/home/adbaby/bin:/home/adbaby/work/pic-tools/scripts/bin
+[adbaby@ADBABY-IN shell_program]$
+
+
+Convert userdefined variable to shell variable:
+------------------------------------------------
+
+method1: 
+----------
+
+export variable = value
+
+Method 2:
+-----------
+Variable = Value
+
+export variable
+
+
+[adbaby@ADBABY-IN shell_program]$ export name="Adarsh"
+[adbaby@ADBABY-IN shell_program]$ echo $name
+Adarsh
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$ sh
+sh-4.2$ echo $name
+Adarsh
+sh-4.2$ echo "$name"
+Adarsh
+sh-4.2$
+
+
+
+Arithemetic Operations:=
+--------------------------
+1. using expr command 
+2. using $((expression)) style
+
+
+
+operand means value or number.
+
+time:34:11
+
+
+
+[adbaby@ADBABY-IN shell_program]$ total=`expr $va + $vb`
+[adbaby@ADBABY-IN shell_program]$ echo "Total Value is:" $total
+Total Value is: 30
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN ~]$ cat /etc/passwd | wc -l
+17
+[adbaby@ADBABY-IN ~]$
+[adbaby@ADBABY-IN ~]$
+[adbaby@ADBABY-IN ~]$ expr `cat /etc/passwd | wc -l`
+17
+[adbaby@ADBABY-IN ~]$ expr `cat /etc/passwd | wc -l` + 10
+27
+[adbaby@ADBABY-IN ~]$
+
+
+
+[adbaby@ADBABY-IN ~]$ echo "\$myvar value is:$myvar"
+$myvar value is:123
+[adbaby@ADBABY-IN ~]$
+
+
+
+multiplication : \*
+
+[adbaby@ADBABY-IN ~]$ expr 10  \* 3
+30
+[adbaby@ADBABY-IN ~]$
+
+
+
+
+expr support only integer type data not floating point.
+
+
+compound style calulcation:"
+---------------------------
+using $((expression)) style
+[adbaby@ADBABY-IN ~]$ echo $((20+20))
+40
+[adbaby@ADBABY-IN ~]$ echo $((20*20))
+400
+[adbaby@ADBABY-IN ~]$ echo $((20-20))
+0
+[adbaby@ADBABY-IN ~]$ echo $((20/20))
+1
+[adbaby@ADBABY-IN ~]$ echo $((20/19))
+1
+[adbaby@ADBABY-IN ~]$
+
+incrementing the value: similar to n++ sytle
+-----------------------
+
+[adbaby@ADBABY-IN ~]$ n=2
+[adbaby@ADBABY-IN ~]$ n=`expr $n + 1`
+[adbaby@ADBABY-IN ~]$ echo $n
+3
+[adbaby@ADBABY-IN ~]$
+
+
+increamenting compound style:
+-----------------------------
+[adbaby@ADBABY-IN ~]$ n=5
+[adbaby@ADBABY-IN ~]$ ((n++))
+[adbaby@ADBABY-IN ~]$ echo $n
+6
+[adbaby@ADBABY-IN ~]$
+
+pre-decrement:
+
+[adbaby@ADBABY-IN ~]$ n=5
+[adbaby@ADBABY-IN ~]$ ((--n))
+[adbaby@ADBABY-IN ~]$ echo $n
+4
+[adbaby@ADBABY-IN ~]$
+
+
+Special variable:
+
+1. $? - last command operation exit status.
+
+
+exit status - 0 means the previous command operation is success.
+
+             -1 means the previous command operation is failure.
+
+
+[adbaby@ADBABY-IN ~]$ date
+Wed Nov  2 15:34:53 IST 2022
+[adbaby@ADBABY-IN ~]$ echo $?
+0  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< success
+[adbaby@ADBABY-IN ~]$ cat mmmm
+cat: mmmm: No such file or directory
+[adbaby@ADBABY-IN ~]$ echo $?
+1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< failure
+[adbaby@ADBABY-IN ~]$
+
+
+2>&1
+
+2 -- std error
+1 -- std output
+
+command > result.log 2>&1
+
+
+[adbaby@ADBABY-IN ~]$ date > r1.log 2>&1;echo $?
+0
+[adbaby@ADBABY-IN ~]$ cat r1.log
+Wed Nov  2 15:41:00 IST 2022
+[adbaby@ADBABY-IN ~]$ sdate > r1.log 2>&1;echo $?
+127
+[adbaby@ADBABY-IN ~]$ cat r1.log
+-bash: sdate: command not found
+[adbaby@ADBABY-IN ~]$
+
+
+
+Relational Operators:
+
+numbers (0-9)
+------------------------
+-eq -ne -lt -gt -ge
+
+string
+---------
+== equal 
+
+!= not equal
+
+$port -gt 500
+
+comparision operator: test  or [ ] -- using test operator we can evaluate our expression
+---------------------------
+
+[adbaby@ADBABY-IN ~]$ test 500 -eq 500;
+[adbaby@ADBABY-IN ~]$ echo $?
+0
+[adbaby@ADBABY-IN ~]$ test 500 -eq 501;
+[adbaby@ADBABY-IN ~]$ echo $?
+1
+[adbaby@ADBABY-IN ~]$ service="httpd"
+[adbaby@ADBABY-IN ~]$ test $service == "httpd"
+[adbaby@ADBABY-IN ~]$ echo $?
+0
+[adbaby@ADBABY-IN ~]$
+
+[adbaby@ADBABY-IN ~]$ count=`ps -ef|wc -l`
+[adbaby@ADBABY-IN ~]$ echo $count
+8
+[adbaby@ADBABY-IN ~]$ test $count -gt 5; echo $?
+0
+[adbaby@ADBABY-IN ~]$ test $count -lt 5; echo $?
+1
+[adbaby@ADBABY-IN ~]$
+
+
+space expression space.
+
+[adbaby@ADBABY-IN ~]$ date
+Wed Nov  2 16:39:09 IST 2022
+[adbaby@ADBABY-IN ~]$ [ $? -eq 0 ];echo $?
+0
+[adbaby@ADBABY-IN ~]$ adad
+-bash: adad: command not found
+[adbaby@ADBABY-IN ~]$ [ $? -eq 0 ];echo $?
+1
+[adbaby@ADBABY-IN ~]$
+
+conditional statements: we are using for testing purpose or validation purpose.
+
+code block - it will execute only one time.
+
+if - keyword:
+-------------
+1. if only
+2. if .. else
+3. if .. elif..elif..elif...else
+
+if only style syntax:
+---------------------
+if<space>[expression]
+then
+    True block
+fi
+
+if .. else
+-----------
+if<space>[expression]
+then
+    True block
+else
+    false block
+fi
+
+
+debug script:
+--------------
+bash -x filename.sh
+
+
+
+elif
+----
+[adbaby@ADBABY-IN shell_program]$ cat -n elif.sh
+     1  read -p "Enter a number:" n
+     2
+     3  if [ $n -gt 50 ]
+     4  then
+     5          echo "Matched-1"
+     6          echo "n value is: $n"
+     7  elif [ $n -eq 50 ]
+     8  then
+     9          echo "Matched-2"
+    10
+    11  elif [ $n -eq 100 ]
+    12  then
+    13          echo "Matched-3"
+    14
+    15  else
+    16          echo "Not Matched"
+    17          echo "n value is $n"
+    18  fi
+    19
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+Nested Condition:
+----------------
+
+[adbaby@ADBABY-IN shell_program]$ cat -n nested2.sh
+     1  read -p "Enter a login name:" ln
+     2
+     3  if [ $ln == admin ]
+     4  then
+     5          read -p "Enter a shell name:" sn
+     6          if [ $sn == "bash" ]
+     7          then
+     8                  p1="bashrc"
+     9                  #echo "Input profile name is: $pin1
+    10          elif [ $sn == "ksh" ]
+    11          then
+    12                  p1="kshrc"
+    13          elif [ $sn == "csh" ]
+    14          then
+    15                  p1="cshrc"
+    16          else
+    17                  p1="/bin/nologin"
+    18                  sn="/etc/profile"
+    19          fi
+    20  echo "
+    21  ------------------------------------------------------------
+    22  |                                                          |
+    23  | Login Shell Name:    Profile name:                       |
+    24  | ----------------     ------------                        |
+    25  |       $sn             $p1                              |
+    26  ------------------------------------------------------------
+    27  "
+    28  else
+    29          echo "You are not an admin user"
+    30          exit
+    31  fi
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+Logical Operator: in a single conditional statement, test more than one condition /// use logical operator.
+================
+
+1. logical and -a
+2. logical or  -o
+3. logical not  !
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n multicondition.sh
+     1  read -p "Enter a port number:" port
+     2
+     3  if [ $port -gt 500 -a $port -lt 600 ]
+     4  then
+     5          echo " Valid port"
+     6          echo " Port number is: $port"
+     7  else
+     8          echo " Invalid port"
+     9  fi
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n or.sh
+     1  read -p "enter a shell name:" sh_var
+     2
+     3  if [ $sh_var == "bash" -o $sh_var == "ksh" ]
+     4  then
+     5          fname="/etc/profile"
+     6  else
+     7          echo "Input shell is not bash or ksh"
+     8          exit
+     9  fi
+    10
+    11  echo "shell name is:$sh_var profile name is: $fname"
+    12
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+Not operator is used for error handling purpose , opposite of testing.
+
+expansion test operator [[ ]]
+
+eg: [[ 105 -gt 100 ]] && [[ 10 -eq 10 ]]
+
+echo $?
+
+
+
+
+File test operators:
+--------------------
+
+file permissions - read , write, execute
+
+file types
+1. Regular files. -f
+    --ASCII/text file -- user can able to read and understand. 
+    --ELF - executable link file -- user cant able to read/ understand. eg, all system commands
+
+
+to determine the file type:
+file <filename>  -- it will show you the type of file.
+
+2. directory type file -d
+3. symbolic link file -l or -h
+4. character type device -c 
+5. block type devices -b
+6. named pipe -p
+7. socket -S
+8. -e -- file is existing or not
+
+[ testoperator <inputfile> ]
+
+
+[adbaby@ADBABY-IN shell_program]$ test -e read.sh
+[adbaby@ADBABY-IN shell_program]$ echo $?
+0
+[adbaby@ADBABY-IN shell_program]$ test -e raaa.sh
+[adbaby@ADBABY-IN shell_program]$ echo $?
+1
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ [ -e read.sh ];echo $?
+0
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+[ -r filename ] == test inputfile is readable or not
+[ -x filename ] == test inputfile is executable or not
+[ -f filename ] == test inputfile is regular or not
+[ -d filename ] == test inputfile is directory file or not
+[ -e filename ] == test inputfile is exist or not
+
+
+[root@ansible-c Desktop]# cat -n testfile.sh 
+     1	read -p "Enter a filename:" fname
+     2	
+     3	if [ -e $fname ]
+     4	then
+     5		echo "input file exist"
+     6		if [ -f $fname ]
+     7		then
+     8			echo "Input file is regular file"
+     9			ls -l $fname
+    10		fi
+    11		if [ -d $fname ]
+    12		then
+    13			echo "Input file is directoty type file"
+    14			ls -ld $fname
+    15		else
+    16			file $fname
+    17		fi
+    18	
+    19	
+    20	else
+    21		echo "file does not exist"
+    22	fi
+    23	
+[root@ansible-c Desktop]# 
+
+root@ansible-c Desktop]# ./testfile.sh 
+Enter a filename:day6
+input file exist
+Input file is directoty type file
+drwxr-xr-x 2 root root 6 Oct 11 06:23 day6
+[root@ansible-c Desktop]#
+
+[root@ansible-c Desktop]# ./testfile.sh 
+Enter a filename:day7
+file does not exist
+[root@ansible-c Desktop]#
+
+
+[root@ansible-c Desktop]# ./testfile.sh 
+Enter a filename:myscript.sh
+input file exist
+Input file is regular file
+-rwxr-xr-x 1 root root 33 Jun 23 11:24 myscript.sh
+myscript.sh: ASCII text
+[root@ansible-c Desktop]# 
+
+
+[root@ansible-c Desktop]# cat -n dirtest.sh 
+     1	read -p "Enter a directoty name:" dir
+     2	
+     3	if [ -d $dir ]
+     4	then
+     5		echo "Input directory exist"
+     6		ls -ld $dir
+     7	else
+     8		mkdir $dir
+     9		ls -ld $dir
+    10	fi
+[root@ansible-c Desktop]#
+
+
+CASE statement - pattern(str,numbers,space,spcl chars)
+-----------
+case value in
+pattern1) pattern1 block operation  -- if the first pattern does not match it will go to the next pattern.
+	  ;;
+	
+pattern2) pattern2 block operation
+	  ;;
+
+pattern3) pattern3 block operation
+	  ;;
+..
+*) 	  default operation   -- * indicates default operation.
+
+esac
+
+------------------
+[adbaby@ADBABY-IN shell_program]$ cat -n case.sh
+     1  read -p "Enter OS name:" OS
+     2
+     3  case $OS in
+     4  RHEL5)  echo "RHEL-5 server started"
+     5          ;;
+     6  RHEL6)  echo "RHEL-6 server started"
+     7          ;;
+     8  OL6)    echo "OL-6 server started"
+     9          ;;
+    10  OL7)    echo "OL-7 server started"
+    11          ;;
+    12  *)      echo "OS $OS does not match"
+    13  esac
+[adbaby@ADBABY-IN shell_program]$
+
+[adbaby@ADBABY-IN shell_program]$ cat -n case-1.sh
+     1  read -p "Enter a server name:" sname
+     2
+     3  case $sname in
+     4  linux|Linux|LINUX) echo "Server Matched"
+     5                     ;;
+     6
+     7  *)                 echo "Not Matched"
+     8  esac
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n case-2.sh
+     1  read -p "Enter a login name:" name
+     2
+     3  case $name in
+     4  admin)  read -p "enter a shell name:" sh_var
+     5          case $sh_var in
+     6
+     7          bash)   fname="bashrc";;
+     8          ksh)    fname="kshrc" ;;
+     9          csh)    fname="cshrc" ;;
+    10          *)
+    11                  sh_var="/bin/nologin"
+    12                  fname="/etc/profile"
+    13          esac
+    14          echo "Shell is $sh_var Profile is $fname"
+    15          ;;
+    16  *)
+    17          echo "sorry you are not admin user"
+    18  esac
+    19
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n case_app.sh
+     1  read -p "Enter app name:" app
+     2
+     3  case $app in
+     4  app1)
+     5          read -p "enter a port number" port
+     6          if [ $port -gt 500 ] && [ $port -lt 600 ]
+     7          then
+     8                  app_port=$port
+     9          else
+    10                  app_port=0
+    11          fi
+    12          echo "App name is $app running Port No. is $port"
+    13          ;;
+    14  app2)
+    15          read -p "enter a port number" port
+    16          if [ $port -gt 301 ] && [ $port -lt 399 ]
+    17          then
+    18                  app_port=$port
+    19          else
+    20                  app_port=0
+    21          fi
+    22          ;;
+    23  *)
+    24          app="demoapp"
+    25          app_port=1000
+    26  esac
+    27  echo "App name is $app - running port is $app_port"
+    28
+[adbaby@ADBABY-IN shell_program]$
+
+single line or inline validation: && ||
+
+&&
+---
+command1 && command 2
+----------------------
+- 1st execute command1 , if it is success then command2 will execute.
+  			 if it is failed wont execute command2.
+
+
+command1 || command2
+---------------------
+1st execute command1 ,  if it is success, then it wont execute command2
+		     ,  if it is failed - then command2 will execute.
+	
+
+
+
+[adbaby@ADBABY-IN shell_program]$ echo "one" && echo "two"
+one
+two
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ mkdir D1 && ls -ld D1
+drwxrwxr-x 1 adbaby adbaby 4096 Nov 12 20:30 D1
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ [ -d D1 ] && rmdir D1
+[adbaby@ADBABY-IN shell_program]$ echo $?
+0
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ [ -f pop.log ] || touch pop.log
+
+
+[adbaby@ADBABY-IN shell_program]$ [ -e var.log ]; echo $?
+1
+[adbaby@ADBABY-IN shell_program]$ [ -e var.log ] || touch var.log
+[adbaby@ADBABY-IN shell_program]$ [ -e var.log ]; echo $?
+0
+[adbaby@ADBABY-IN shell_program]$ ll var.log
+-rw-rw-r-- 1 adbaby adbaby 0 Nov 14 07:53 var.log
+[adbaby@ADBABY-IN shell_program]$
+
+
+[ -f file ] || exit
+
+
+
+if ! [ -f inputfile ];then
+	echo "not a reg.file"
+	exit
+fi
+
+[ -f $inputfile ] || echo " Not a reg.file"; exit
+
+
+
+[adbaby@ADBABY-IN shell_program]$ (date;uname;uptime) > r2.log
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$ cat r2.log
+Mon Nov 14 10:19:36 IST 2022
+Linux
+ 10:19:36 up  2:43,  0 users,  load average: 0.52, 0.58, 0.59
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+looping statements:
+-------------------
+ code block - execute more than one time.
+	1. conditional style loop - based on boolean (status code)
+	2. collection style loop - code blk will execute based on No. of items.
+
+
+
+conditional style loop:
+-----------------------
+while loop
+
+until loop << opp. of while loop
+
+
+while loop:
+------------
+
+3 rules.
+----------
+
+rule 1: initialization
+rule 2: test or condition
+rule 3: arithematic
+
+initialization  << rule 1
+while [ condition ] << rule 2
+do
+	code block
+	arithematic << rule 3
+done
+
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n while.sh
+     1  i=0;
+     2  while [ $i -lt 10 ]
+     3  do
+     4          echo "i value is: $i"
+     5          ((i++))
+     6  done
+[adbaby@ADBABY-IN shell_program]$ ./while.sh
+i value is: 0
+i value is: 1
+i value is: 2
+i value is: 3
+i value is: 4
+i value is: 5
+i value is: 6
+i value is: 7
+i value is: 8
+i value is: 9
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n while_up.sh
+     1  i=0;
+     2  while [ $i -lt 5 ]
+     3  do
+     4          uptime;sleep 2;
+     5          ((i++))
+     6  done
+[adbaby@ADBABY-IN shell_program]$
+
+[adbaby@ADBABY-IN shell_program]$ ./while_up.sh
+ 12:04:55 up  4:28,  0 users,  load average: 0.52, 0.58, 0.59
+ 12:04:57 up  4:28,  0 users,  load average: 0.52, 0.58, 0.59
+ 12:04:59 up  4:28,  0 users,  load average: 0.52, 0.58, 0.59
+ 12:05:01 up  4:28,  0 users,  load average: 0.52, 0.58, 0.59
+ 12:05:03 up  4:28,  0 users,  load average: 0.52, 0.58, 0.59
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+STDOUT (FD:1) & STDERR(FD:2)
+----------------------------
+root@hosts~]# uname
+Linux <<< STDOUT
+
+
+root@hosts~]# unamee
+unamee command not found <<<< STDERR
+
+
+root@hosts~]# command > resultfile
+		      |_______create and write data to file
+			      if resultfile is already exists - overwrite
+
+
+
+root@hosts~]# command >> resultfile
+		      |-> append operation
+
+
+root@hosts~]# command >> resultfile.log 2>&1
+
+	
+
+----------------------
+
+while <space>:
+do
+	code block
+done
+
+(or)
+
+while true
+do
+	code block
+done
+-------------------// always active block
+
+break - exit from loop not from script.
+
+
+
+[adbaby@ADBABY-IN shell_program]$ while :
+> do
+> echo "hello"
+> uptime
+> ps
+> uname
+> sleep 1
+> done
+hello
+ 12:56:42 up  5:20,  0 users,  load average: 0.52, 0.58, 0.59
+  PID TTY          TIME CMD
+    8 tty1     00:00:01 bash
+  140 tty1     00:00:00 ps
+Linux
+hello
+ 12:56:43 up  5:20,  0 users,  load average: 0.52, 0.58, 0.59
+  PID TTY          TIME CMD
+    8 tty1     00:00:01 bash
+  144 tty1     00:00:00 ps
+Linux
+hello
+ 12:56:44 up  5:20,  0 users,  load average: 0.52, 0.58, 0.59
+  PID TTY          TIME CMD
+    8 tty1     00:00:01 bash
+  148 tty1     00:00:00 ps
+
+Linux
+hello
+ 12:56:50 up  5:20,  0 users,  load average: 0.52, 0.58, 0.59
+  PID TTY          TIME CMD
+    8 tty1     00:00:01 bash
+  168 tty1     00:00:00 ps
+Linux
+^C
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+tty - tele type writer. 
+ |____Print file name of standard input's terminal
+
+pts - pseudo terminal slave
+ |____pty (pseudo terminal device) is a terminal device which is emulated by an other program (example: xterm, screen, or ssh are such programs).
+
+
+
+systemd is the parent of all the process.
+
+basic system administration command.
+
+systemctl status filename.service
+	  start  filename.service
+	  restart filename.service
+          stop filename.service
+
+
+
+infinite loop is helpful when to peform some taks to keep on running.
+
+
+
+[root@ansible-c system]# pwd
+/usr/lib/systemd/system
+[root@ansible-c system]# cat -n sshd.service 
+     1	[Unit]
+     2	Description=OpenSSH server daemon
+     3	Documentation=man:sshd(8) man:sshd_config(5)
+     4	After=network.target sshd-keygen.target
+     5	Wants=sshd-keygen.target
+     6	
+     7	[Service]
+     8	Type=notify
+     9	EnvironmentFile=-/etc/crypto-policies/back-ends/opensshserver.config
+    10	EnvironmentFile=-/etc/sysconfig/sshd
+    11	ExecStart=/usr/sbin/sshd -D $OPTIONS $CRYPTO_POLICY
+    12	ExecReload=/bin/kill -HUP $MAINPID
+    13	KillMode=process
+    14	Restart=on-failure
+    15	RestartSec=42s
+    16	
+    17	[Install]
+    18	WantedBy=multi-user.target
+[root@ansible-c system]# 
+
+
+/etc/systemd/system/filename.service
+[Unit]
+Description="Own description"
+[Service]
+ExecStart=/bin/command or filepath/file.sh
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+user defined service:
+
+cat -n /etc/systemd/system/ab.service
+[Unit]
+Description="About my system load balance"
+[Service]
+ExecStart=/root/p137
+[Install]
+WantedBy=multi-user.target
+
+systemctl daemon-reload
+systemctl enable ab.service
+systemctl start  ab.service
+systemctl status ab.service
+
+? - means process is not created by user, it is under system control.
+
+
+infinite loop:
+
+cat -n /root/p137
+
+while :
+do
+	uptime >>/var/log/lavg.log
+	sleep 5
+done
+
+
+[root@ansible-c system]# systemctl daemon-reload
+[root@ansible-c system]# systemctl enable lavg.service
+[root@ansible-c system]# systemctl start lavg.service
+[root@ansible-c system]# systemctl status lavg.service
+● lavg.service - "About my system load average"
+   Loaded: loaded (/etc/systemd/system/lavg.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2022-11-14 16:06:18 IST; 5s ago
+ Main PID: 28225 (p138)
+    Tasks: 2 (limit: 26356)
+   Memory: 620.0K
+   CGroup: /system.slice/lavg.service
+           ├─28225 /bin/bash /root/p138
+           └─28268 sleep 5
+
+Nov 14 16:06:18 ansible-c systemd[1]: Started "About my system load average".
+[root@ansible-c system]#
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n while_login.sh
+     1  i=0;
+     2  while [ $i -lt 3 ]
+     3  do
+     4          read -p "enter your login name:" name
+     5          if [ $name == "admin" -o $name == "Admin" ]
+     6
+     7          then
+     8                  echo "Yes, Login is success"
+     9                  break
+    10          else
+    11                  echo "try again"
+    12          fi
+    13  ((i++))
+    14  done
+    15
+[adbaby@ADBABY-IN shell_program]$
+
+[adbaby@ADBABY-IN shell_program]$ ./while_login.sh
+enter your login name:root
+try again
+enter your login name:admin
+Yes, Login is success
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+until loop:
+
+[adbaby@ADBABY-IN shell_program]$ cat -n until_loop.sh
+     1  i=10;
+     2  until [ $i -lt 5 ]
+     3  do
+     4          echo "until loop - $i"
+     5          ((--i))
+     6  done
+[adbaby@ADBABY-IN shell_program]$
+
+[adbaby@ADBABY-IN shell_program]$ ./until_loop.sh
+until loop - 10
+until loop - 9
+until loop - 8
+until loop - 7
+until loop - 6
+until loop - 5
+[adbaby@ADBABY-IN shell_program]$
+
+
+collection style loop : - based on number of items.
+=====================================================
+
+1. for
+2. select
+
+for loop:
+----------
+syntax:
+------
+for variable in collection of items.
+do
+	code block
+done
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n for_loop.sh
+     1  for i in pop.log pop2.log 103 104 1.34
+     2  do
+     3          echo " i value is: $i"
+     4  done
+[adbaby@ADBABY-IN shell_program]$ ./for_loop.sh
+ i value is: pop.log
+ i value is: pop2.log
+ i value is: 103
+ i value is: 104
+ i value is: 1.34
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ for i in `ls *.sh`
+> do
+> echo "i value is $i"
+> done
+i value is case-1.sh
+i value is case-2.sh
+i value is case_app.sh
+i value is case.sh
+i value is demoapp.sh
+i value is disk_size.sh
+i value is elif.sh
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n for_loop1.sh
+     1  for i in `ls *.sh`
+     2  do
+     3          echo "File name: $i"
+     4          echo "About $i file details:-"
+     5          echo
+     6          ls -l $i
+     7          echo
+     8          sleep 1
+     9  done
+[adbaby@ADBABY-IN shell_program]$
+
+continue keyword:- ignore the current iteration - continue next item. - it wont exit from the loop.
+----------------- 
+break and continue and looping keywords.
+
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n for_loop2.sh
+     1  for i in `find /home/adbaby -name "*.sh"`
+     2  do
+     3          cat -n $i | less
+     4  done
+[adbaby@ADBABY-IN shell_program]$
+
+
+for i in *
+do
+echo $i
+done
+
+
+floating point calulation:  bc
+----------------------------
+[root@ansible-c Desktop]# echo 10.12+23.23 |bc
+33.35
+[root@ansible-c Desktop]# t=`echo 10.12+23.23 |bc`
+[root@ansible-c Desktop]# echo "Total value is: $t"
+Total value is: 33.35
+[root@ansible-c Desktop]#
+
+
+average:
+========
+[root@ansible-c Desktop]# echo "scale=2;453/9" | bc
+50.33
+[root@ansible-c Desktop]#
+
+
+root@ansible-c Desktop]# avg=`echo "scale=2;453/9" | bc`
+
+[root@ansible-c Desktop]# echo "Average value is" $avg
+Average value is 50.33
+[root@ansible-c Desktop]#
+
+
+
+
+root@ansible-c Desktop]# cat -n bc_avg.sh 
+     1	
+     2	read -p "enter student name:" name
+     3	
+     4	
+     5	
+     6	read -p "enter $name sub1 mark:" s1
+     7	read -p "enter $name sub2 mark:" s2
+     8	read -p "enter $name sub3 mark:" s3
+     9	
+    10	
+    11	total=`expr $s1 + $s2 + $s3`
+    12	
+    13	avg=`echo "scale=2;$total/3"|bc`
+    14	
+    15	echo -e  "Student name:$name\t Total Marks:$total\t Avg:$avg"
+    16	
+    17	
+    18	
+    19	
+[root@ansible-c Desktop]# 
+
+
+enter Adarsh sub3 mark:28
+Student name:Adarsh	 Total Marks:225	 Avg:75.00
+[root@ansible-c Desktop]# 
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n while_pin.sh
+     1  pin=1234
+     2  count=0
+     3  while [ $count -lt 3 ]
+     4  do
+     5          read -p "enter a pin number" PIN
+     6          ((count++))
+     7          #count=`expr $count + 1`
+     8          if [ $pin -eq $PIN ]
+     9          then
+    10                  echo "PIN success -$PIN is matched at `date`" >> pin_history.log
+    11                  echo "Success - pin is matched $count"
+    12                  break
+    13          else
+    14                  echo "failed input pin:$PIN is not matched" >> pin_history.log
+    15          fi
+    16  done
+    17          if [ $pin -ne $PIN ]
+    18          then
+    19          echo "pin blocked - $count" >> pin_history
+    20          echo "Sorry pin is blocked"
+    21          fi
+[adbaby@ADBABY-IN shell_program]$
+
+1  for i in `find /home/adbaby -name "*.sh"`
+     2  do
+     3          cat -n $i | less
+     4  done
+[adbaby@ADBABY
+/home/adbaby/AWK/shell_program
+
+
+select - collection  style loop:
+----------------------------------
+menu driven programming
+always active
+for loop style syntax
+select >> #?  <=== PS3 prompt
+
+primary prompt >> root@host~]#  PS1
+
+secondary prompt >> echo "data1()
+		 >  <======= PS2 
+
+select loop prompt => #?
+
+debugging prompt ==>> bash -x p1.sh
+		  +   <------- PS4
+
+
+[adbaby@ADBABY-IN shell_program]$ select v in *.sh; do echo "V value is $v"; done
+1) case-1.sh                       7) elif.sh                       13) for_log.sh                    19) myapp_details_2.sh            25) read.sh                       31) while_up.sh
+2) case-2.sh                       8) family.sh                     14) for_loop1.sh                  20) myapp_details_dynamic_std.sh  26) status_code.sh
+3) case_app.sh                     9) file_reg2.sh                  15) for_loop2.sh                  21) myapp_details.sh              27) until_loop.sh
+4) case.sh                        10) file_reg.sh                   16) for_loop.sh                   22) nested2.sh                    28) while_login.sh
+5) demoapp.sh                     11) file_search.sh                17) ifonly.sh                     23) nested.sh                     29) while_pin.sh
+6) disk_size.sh                   12) file_stat.sh                  18) multicondition.sh             24) or.sh                         30) while.sh
+#?
+
+
+select + case
+
+select syntax
+-------------
+
+select variable in menu1 menu2 menu3 menu4
+do
+	case $variable in 
+	menu1) menu1 operation ;;
+	menu2) menu1 operation ;;
+	menu3) menu1 operation ;;
+	menu4) menu1 operation ;;
+	*)     default operation
+	esac
+done
+
+[adbaby@ADBABY-IN env]$ echo $PS1
+[\u@\h \W]\$
+[adbaby@ADBABY-IN env]$ echo $PS2
+>
+[adbaby@ADBABY-IN env]$ echo $PS4
++
+[adbaby@ADBABY-IN env]$
+
+PS1 is called primary prompt
+PS2 is called secondary prompt
+PS3 is for the select statement prompt
+PS4 is for the debug prompt
+
+C4L1~]$cat -n select.sh
+     1  select v in data1 data2 data3
+     2  do
+     3  echo "selected value is:" $v
+     4  done
+C4L1~]$
+
+C4L1~]$./select.sh
+1) data1
+2) data2
+3) data3
+#? 1
+selected value is: data1
+#? 2
+selected value is: data2
+#? 3
+selected value is: data3
+#?
+
+C4L1~]$cat -n select.sh
+     1  PS3="Enter your choice"
+     2  select v in data1 data2 data3
+     3  do
+     4  echo "selected value is:" $v
+     5  done
+C4L1~]$
+
+
+C4L1~]$./select.sh
+1) data1
+2) data2
+3) data3
+Enter your choice1
+selected value is: data1
+Enter your choice2
+selected value is: data2
+Enter your choice3
+selected value is: data3
+Enter your choice
+
+
+while loop + case statement:
+----------------------------
+C4L1~]$cat -n case_while_fn.sh
+     1  f(){
+     2          read
+     3  }
+     4
+     5  while :
+     6  do
+     7  echo "
+     8     ***************SYSTEM INFO********************
+     9     *                                            *
+    10     *  1. Kernel info                            *
+    11     *  2. Shell info                             *
+    12     *  3. Login details                          *
+    13     *  4. last 5 process details                 *
+    14     *  5. Mounted filesystem                     *
+    15     *  6. Quit                                   *
+    16     ********************************************** "
+    17
+    18
+    19  read -p "enter your choice:" choice
+    20
+    21  case $choice in
+    22  1)      echo "Kernel details:"
+    23          uname -rs
+    24          ;;
+    25  2)      echo -e "Login shell:$SHELL \t Version:$BASH_VERSION"
+    26          ;;
+    27  3)      echo "Login name:`whoami` \t Login ID: `UID`"
+    28          ;;
+    29  4)      echo "Last five process details"
+    30          ps -e | tail -n 5
+    31          ;;
+    32  5)      echo "Mounted file system"
+    33          echo "--------------------"
+    34          df -Th
+    35          ;;
+    36  6)      echo "Thank you";break;;
+    37  *)      echo "Sorry $choice is invalid choice"
+    38  esac
+    39  f
+    40  done
+C4L1~]$
+
+
+enter your choice:1
+Kernel details:
+Linux 4.4.0-19041-Microsoft
+
+
+   ***************SYSTEM INFO********************
+   *                                            *
+   *  1. Kernel info                            *
+   *  2. Shell info                             *
+   *  3. Login details                          *
+   *  4. last 5 process details                 *
+   *  5. Mounted filesystem                     *
+   *  6. Quit                                   *
+   **********************************************
+enter your choice:2
+Login shell:/bin/bash    Version:4.2.46(2)-release
+
+
+   ***************SYSTEM INFO********************
+   *                                            *
+   *  1. Kernel info                            *
+   *  2. Shell info                             *
+   *  3. Login details                          *
+   *  4. last 5 process details                 *
+   *  5. Mounted filesystem                     *
+   *  6. Quit                                   *
+   **********************************************
+enter your choice:3
+./case_while_fn.sh: line 27: UID: command not found
+Login name:adbaby \t Login ID:
+
+
+   ***************SYSTEM INFO********************
+   *                                            *
+   *  1. Kernel info                            *
+   *  2. Shell info                             *
+   *  3. Login details                          *
+   *  4. last 5 process details                 *
+   *  5. Mounted filesystem                     *
+   *  6. Quit                                   *
+   **********************************************
+enter your choice:4
+Last five process details
+   39 ?        00:00:00 ssh
+  112 ?        00:00:00 ssh
+  397 tty1     00:00:00 bash
+  401 tty1     00:00:00 ps
+  402 tty1     00:00:00 tail
+
+
+   ***************SYSTEM INFO********************
+   *                                            *
+   *  1. Kernel info                            *
+   *  2. Shell info                             *
+   *  3. Login details                          *
+   *  4. last 5 process details                 *
+   *  5. Mounted filesystem                     *
+   *  6. Quit                                   *
+   **********************************************
+enter your choice:5
+Mounted file system
+--------------------
+Filesystem     Type   Size  Used Avail Use% Mounted on
+rootfs         wslfs  233G  185G   49G  80% /
+none           tmpfs  233G  185G   49G  80% /dev
+none           tmpfs  233G  185G   49G  80% /run
+none           tmpfs  233G  185G   49G  80% /run/lock
+none           tmpfs  233G  185G   49G  80% /run/shm
+none           tmpfs  233G  185G   49G  80% /run/user
+tmpfs          tmpfs  233G  185G   49G  80% /sys/fs/cgroup
+C:\            drvfs  233G  185G   49G  80% /mnt/c
+
+time: 35:54
+
+
+convert the above program into select case style:
+--------------------------------------------------
+
+C4L1~]$cat -n select_case.sh
+     1  PS3="Enter your choice"
+     2  select v in Kernel shell login process filesystem Quit
+     3  do
+     4          case $v in
+     5          Kernel)         echo "Kernel details:-"
+     6                          uname -rs
+     7                          ;;
+     8          shell)          echo "Login shell:$SHELL \t Version: $BASH_VERSION"
+     9                          ;;
+    10          login)          echo "Login name: `whoami` \t login id: $UID"
+    11                          ;;
+    12          process)        echo "Last five process details"
+    13                          ps -e | tail -n 5
+    14                          ;;
+    15          filesystem)     echo "filesystem details"
+    16                          df -Th
+    17                          ;;
+    18          Quit)           echo "Thank you";break
+    19                          ;;
+    20          *)              echo "Invalid choice"
+    21          esac
+    22  done
+C4L1~]$
+
+
+C4L1~]$./select_case.sh
+1) Kernel      3) login       5) filesystem
+2) shell       4) process     6) Quit
+Enter your choice1
+Kernel details:-
+Linux 4.4.0-19041-Microsoft
+Enter your choice2
+Login shell:/bin/bash \t Version: 4.2.46(2)-release
+Enter your choice3
+Login name: adbaby \t login id: 1000
+Enter your choice4
+Last five process details
+   39 ?        00:00:00 ssh
+  112 ?        00:00:00 ssh
+  417 tty1     00:00:00 bash
+  420 tty1     00:00:00 ps
+  421 tty1     00:00:00 tail
+Enter your choice5
+filesystem details
+Filesystem     Type   Size  Used Avail Use% Mounted on
+rootfs         wslfs  233G  185G   49G  80% /
+none           tmpfs  233G  185G   49G  80% /dev
+none           tmpfs  233G  185G   49G  80% /run
+none           tmpfs  233G  185G   49G  80% /run/lock
+none           tmpfs  233G  185G   49G  80% /run/shm
+none           tmpfs  233G  185G   49G  80% /run/user
+tmpfs          tmpfs  233G  185G   49G  80% /sys/fs/cgroup
+C:\            drvfs  233G  185G   49G  80% /mnt/c
+Enter your choice6
+Thank you
+C4L1~]$
+
+
+
+commandline arguments
+----------------------
+
+1. Runtime inputs
+2. Non interactive inputs
+
+./p1.sh input1 input2 input3 ...{enter}
+
+        -----  ------  -----
+	$1      $2      $3  ... $9  <<<<------ command line argument variables.
+	
+command line arguments are called positional parameters.
+$@  - it will print list of all the values
+$*  - it will print list of all the values
+$#  - It will print total number of arguments.
+
+C4L1~]$cat -n runtime_args.sh
+     1  echo $1 $2 $3
+     2  echo $2
+     3  echo $4
+     4  echo "Total No. of command line aruments:" $#
+     5
+     6  if [ $# -eq 0 ]
+     7  then
+     8          echo "Empty arguments"
+     9  fi
+    10
+    11  echo "$@"  <<<< it will print list of all the values
+    12  echo "$*"  <<<< it will print list of all the values
+C4L1~]$./runtime_args.sh 1 2 3 4
+1 2 3
+2
+4
+Total No. of command line aruments: 4
+1 2 3 4
+1 2 3 4
+C4L1~]$
+
+
+C4L1~]$./runtime_args.sh 1 2 3 4 5 pop.log 55 123 33 6 66 a.log b.log c.log
+1 2 3
+2
+4
+Total No. of command line aruments: 14
+1 2 3 4 5 pop.log 55 123 33 6 66 a.log b.log c.log
+1 2 3 4 5 pop.log 55 123 33 6 66 a.log b.log c.log
+C4L1~]$
+
+
+
+C4L1~]$cat -n runtime_args_for.sh
+     1  for v in "$*"
+     2  do
+     3          echo "$v"
+     4  done
+     5  echo
+     6  for v in "$@"
+     7  do
+     8          echo "$v"
+     9  done
+    10
+C4L1~]$./runtime_args_for.sh 12 11 11 1 2 3 4 5 pop.log
+12 11 11 1 2 3 4 5 pop.log
+
+12
+11
+11
+1
+2
+3
+4
+5
+pop.log
+C4L1~]$
+
+
+10.10.0.101	mhost1
+
+ping -c $1 $2
+
+command line argument style:
+
+[root@ansible-c shell_scripting]# cat -n runtime_ping.sh 
+     1	ping -c $1 $2
+[root@ansible-c shell_scripting]# ./runtime_ping.sh 10 10.10.0.101
+PING 10.10.0.101 (10.10.0.101) 56(84) bytes of data.
+64 bytes from 10.10.0.101: icmp_seq=1 ttl=64 time=0.557 ms
+64 bytes from 10.10.0.101: icmp_seq=2 ttl=64 time=1.54 ms
+64 bytes from 10.10.0.101: icmp_seq=3 ttl=64 time=1.04 ms
+64 bytes from 10.10.0.101: icmp_seq=4 ttl=64 time=0.436 ms
+64 bytes from 10.10.0.101: icmp_seq=5 ttl=64 time=0.413 ms
+64 bytes from 10.10.0.101: icmp_seq=6 ttl=64 time=0.713 ms
+64 bytes from 10.10.0.101: icmp_seq=7 ttl=64 time=1.56 ms
+64 bytes from 10.10.0.101: icmp_seq=8 ttl=64 time=0.676 ms
+64 bytes from 10.10.0.101: icmp_seq=9 ttl=64 time=1.37 ms
+64 bytes from 10.10.0.101: icmp_seq=10 ttl=64 time=1.20 ms
+
+--- 10.10.0.101 ping statistics ---
+10 packets transmitted, 10 received, 0% packet loss, time 9146ms
+rtt min/avg/max/mdev = 0.413/0.950/1.564/0.424 ms
+[root@ansible-c shell_scripting]#
+
+
+[root@ansible-c adbaby]# cat -n runttime_disksum.sh 
+     1	sum=`expr $1 + $2`
+     2	echo "Total disk size is:$sum"
+     3	
+[root@ansible-c adbaby]# ./runttime_disksum.sh 200 19
+Total disk size is:219
+[root@ansible-c adbaby]#
+
+
+[root@ansible-c adbaby]# cat -n runtime_filexist.sh 
+     1	[ -e $1 ]
+     2	if [ $? == 0 ]
+     3	then
+     4		echo "file: $1 exist"
+     5		ls -l $1
+     6	else
+     7		echo "file $1 does not exist"
+     8	fi
+     9	
+    10	
+[root@ansible-c adbaby]# 
+
+[root@ansible-c adbaby]# ./runtime_filexist.sh ansible.cfg
+file: ansible.cfg exist
+-rw-r--r-- 1 root root 346 Sep 24 18:41 ansible.cfg
+[root@ansible-c adbaby]# ./runtime_filexist.sh pop.log
+file pop.log does not exist
+[root@ansible-c adbaby]# 
+
+positional parameters:
+-----------------------
+nth argument -- ${n}
+
+$0 - working shell name or working script file name.
+$$ - working shell process id
+echo $1 same as ${1}
+echo $2 same as ${2}
+echo $3 same as ${3}
+echo $4 same as ${4}
+
+..
+
+10th arg -- echo ${10}
+11th arg -- echo ${11}
+
+Nth arg  -- echo ${N}
+
+echo $@  same as echo ${@}
+echo $*  same as echo ${*}
+echo $#  same as echo ${#}
+
+
+
+
+[root@ansible-c shell_scripting]# cat -n runtime_ping.sh 
+     1	if [ $# -ne 2 ]
+     2	then
+     3		echo "Usage: command requires mininum two parameters"
+     4		exit
+     5	fi
+     6	
+     7	ping -c $1 $2
+[root@ansible-c shell_scripting]# 
+
+
+basename - strip directoty and suffix from filename
+----------
+
+[adbaby@ADBABY-IN AWK]$ basename /home/adbaby/AWK/average.awk
+average.awk
+[adbaby@ADBABY-IN AWK]$
+[adbaby@ADBABY-IN AWK]$ basename /home/adbaby/AWK/shell_program
+shell_program
+[adbaby@ADBABY-IN AWK]$
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n runtime_vmstat.sh
+     1  vmstat $1 $2 >> /home/adbaby/AWK/vm_repo.log
+     2  echo "exit from `basename $0` script"
+[adbaby@ADBABY-IN shell_program]$ ./runtime_vmstat.sh 3 5
+Error: /proc must be mounted
+  To mount /proc at boot you need an /etc/fstab line like:
+      proc   /proc   proc    defaults
+  In the meantime, run "mount proc /proc -t proc"
+exit from runtime_vmstat.sh script
+[adbaby@ADBABY-IN shell_program]$
+
+Array:
+------
+arrayname=(list of items)
+
+arr=(150 data 1.35)
+      0    1   2		
+     -3   -2  -1
+
+How to fetch single value from an array?
+
+${arrayname[index]}
+
+fsinfo=("index.html" 156kb "/var/www")
+echo ${fsinfo[1]} >> 156kb
+echo ${fsinfo[2]}  >> /var/www
+
+
+[adbaby@ADBABY-IN shell_program]$ fsinfo=("index.html" 156kb "/var/www")
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$ echo ${fsinfo[1]}
+156kb
+[adbaby@ADBABY-IN shell_program]$ echo ${fsinfo[2]}
+/var/www
+[adbaby@ADBABY-IN shell_program]$ echo ${fsinfo[0]}
+index.html
+[adbaby@ADBABY-IN shell_program]$
+
+
+To modify existing data item.
+
+arrayname[old_index]=updated_value
+--------------------------------------
+[adbaby@ADBABY-IN shell_program]$ fsinfo[0]="Linux"
+[adbaby@ADBABY-IN shell_program]$ echo ${fsinfo[0]}
+Linux
+[adbaby@ADBABY-IN shell_program]$
+
+
+how to print list of all items in an array?
+--------------------------------------------
+
+
+${arrayname[@]} or ${arrayname[*]}
+
+
+
+[adbaby@ADBABY-IN shell_program]$ echo ${fsinfo[@]}
+Linux 156kb /var/www
+[adbaby@ADBABY-IN shell_program]$ echo ${fsinfo[*]}
+Linux 156kb /var/www
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ for i in `echo ${server[@]}`
+> do
+> echo "server: $i"
+> done
+server: cn02
+server: cn03
+server: cn01
+server: cn06
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+
+scalar data - means single data.
+array data - means collection of data.
+
+L=`ls /var/log/*.log`
+echo ${L}
+|__ this is not an array, we can't use indexing.
+
+
+array:
+------
+log=(`ls /var/log/*.log`)
+echo ${log[index]}
+  |_____this is an array variable, we can use indexing.
+
+
+
+[adbaby@ADBABY-IN env]$ region=(`ls *.env`)
+[adbaby@ADBABY-IN env]$ echo ${region[1]}
+arn1.env
+[adbaby@ADBABY-IN env]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n array_servers.sh
+     1  servers=($@)
+     2
+     3  for v in ${servers[@]}
+     4  do
+     5          echo "V value is: $v"
+     6  done
+[adbaby@ADBABY-IN shell_program]$ ./array_servers.sh 10 10 10 22 33 44 55 66
+V value is: 10
+V value is: 10
+V value is: 10
+V value is: 22
+V value is: 33
+V value is: 44
+V value is: 55
+V value is: 66
+[adbaby@ADBABY-IN shell_program]$
+
+how to read multiple values from command line:
+-----------------------------------------------
+without -a option , it will not treat as array.
+------------------
+[adbaby@ADBABY-IN shell_program]$ read os
+unix linux RHEL centos Fedora
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$ echo ${os[@]}
+unix linux RHEL centos Fedora
+[adbaby@ADBABY-IN shell_program]$
+
+
+with -a option , -a is array variable
+----------------  --------------------
+[adbaby@ADBABY-IN shell_program]$ read -a os
+unix linux RHEL centos Fedora
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$  echo ${os[1]}
+linux
+[adbaby@ADBABY-IN shell_program]$  echo ${os[2]}
+RHEL
+[adbaby@ADBABY-IN shell_program]$  echo ${os[-1]}
+Fedora
+[adbaby@ADBABY-IN shell_program]$
+
+ps -e |awk '{print $1}'  -- it will print all the process id.
+
+
+array slicing technique
+------------------
+[adbaby@ADBABY-IN shell_program]$ num=( 1 2 3 4 5 6 7 8 9 0 10 11 12 13 14 15 16 17)
+[adbaby@ADBABY-IN shell_program]$ echo ${num[@]}
+1 2 3 4 5 6 7 8 9 0 10 11 12 13 14 15 16 17
+[adbaby@ADBABY-IN shell_program]$ echo ${num[@]:3:7}
+4 5 6 7 8 9 0
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+array manipulation:
+-------------------
+[adbaby@ADBABY-IN shell_program]$ num=( 1 2 3 4 5 6 7 8 9 0 10 11 12 13 14 15 16 17)
+[adbaby@ADBABY-IN shell_program]$ echo ${num[@]}
+1 2 3 4 5 6 7 8 9 0 10 11 12 13 14 15 16 17
+[adbaby@ADBABY-IN shell_program]$ echo ${num[@]:3:7}
+4 5 6 7 8 9 0
+[adbaby@ADBABY-IN shell_program]$ num=(rhel rhel2 ol5 ol6 ${num[@]} ol7 ol8)
+[adbaby@ADBABY-IN shell_program]$ echo ${num[@]}
+rhel rhel2 ol5 ol6 1 2 3 4 5 6 7 8 9 0 10 11 12 13 14 15 16 17 ol7 ol8
+[adbaby@ADBABY-IN shell_program]$
+
+
+unset comamnd will delete the existing value of a variable.
+-----
+
+[adbaby@ADBABY-IN shell_program]$ var=300
+[adbaby@ADBABY-IN shell_program]$ echo $var
+300
+[adbaby@ADBABY-IN shell_program]$ unset var
+[adbaby@ADBABY-IN shell_program]$ echo $var
+
+[adbaby@ADBABY-IN shell_program]$
+
+
+unset array item
+
+[adbaby@ADBABY-IN shell_program]$ arr=(1 2 3 4 5)
+[adbaby@ADBABY-IN shell_program]$ echo ${arr[@]}
+1 2 3 4 5
+[adbaby@ADBABY-IN shell_program]$ unset arr[1]
+[adbaby@ADBABY-IN shell_program]$ echo ${arr[@]}
+1 3 4 5
+[adbaby@ADBABY-IN shell_program]$ unset arr[@]
+[adbaby@ADBABY-IN shell_program]$ echo ${arr[@]}
+
+[adbaby@ADBABY-IN shell_program]$
+
+
+tr - translate or delete characters.
+------------------------------------
+
+
+[adbaby@ADBABY-IN shell_program]$ v=(`echo "100,200,arun,400,sales,grapes"`)
+[adbaby@ADBABY-IN shell_program]$ echo ${v[@]}
+100,200,arun,400,sales,grapes
+[adbaby@ADBABY-IN shell_program]$
+
+[adbaby@ADBABY-IN shell_program]$ echo $v|tr "," " "
+100 200 arun 400 sales grapes
+[adbaby@ADBABY-IN shell_program]$ A=(`echo $v|tr "," " "`)
+[adbaby@ADBABY-IN shell_program]$ echo ${A[1]}
+200
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ echo ${A[2]}
+arun
+[adbaby@ADBABY-IN shell_program]$ echo ${A[-1]}
+grapes
+[adbaby@ADBABY-IN shell_program]$ echo ${A[@]}
+100 200 arun 400 sales grapes
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ echo ${A[@]}
+100 200 arun 400 sales grapes
+[adbaby@ADBABY-IN shell_program]$ echo ${A[@]} |tr " " ":"
+100:200:arun:400:sales:grapes
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+cut command + array combination:
+----------------------------------
+
+cut -d, -f 2 /root/emp.csv | sort
+
+cut -d, -f 2 /root/emp.csv | sort|uniq -i
+
+A=(`cut -d, -f 2 /root/emp.csv | sort|uniq -i`)
+
+for v in ${A[@]}
+do
+	echo "v value is:$v"
+done
+
+
+
+file handling:
+---------------
+file handling can be achieved by using 
+
+while loop + redirection symbol
+
+> - create & write
+>> - append
+< - read
+
+
+ 
+1. read data from <FILE> to script - display to monitor (not using keyboard)
+
+2. script --> create/wrire a new file (not using monitor)
+
+3. read data from <oneFILE> to script - create/write data to another FILE
+					(not using I/O)
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fh_read.sh
+     1  <<123
+     2  while :
+     3  do
+     4  read -p "enter dome text" var
+     5  echo "->$var"
+     6  done
+     7  123
+     8
+     9  while read v  # it is record based looping. Once we reah end of record it will exist.
+    10  do
+    11          echo "!$v"
+    12  done
+    13
+    14
+    15
+[adbaby@ADBABY-IN shell_program]$
+
+    16  ps |while read v
+    17  do
+    18          echo "->$v"
+    19  done
+    20
+    21
+[adbaby@ADBABY-IN shell_program]$ ./fh_read.sh
+->PID TTY          TIME CMD
+->8 tty1     00:00:02 bash
+->274 tty1     00:00:00 bash
+->275 tty1     00:00:00 ps
+->276 tty1     00:00:00 bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+1. read data from <FILE> to script - display to monitor (not using keyboard)
+
+syntax
+-------
+while read variable
+do
+	code block
+done
+
+
+[adbaby@ADBABY-IN shell_program]$ cat while_up.sh | while read var
+> do
+> echo "==>$var"
+> done
+==>i=0;
+==>while [ $i -lt 5 ]
+==>do
+==>uptime;sleep 2;
+==>((i++))
+==>done > result.log
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ while read var
+> do
+> echo "-->$var"
+> done<while.sh  <<<<<<<<<<<<<<<<<<,, reading while.sh file
+-->i=0;
+-->while [ $i -lt 10 ]
+-->do
+-->echo "i value is: $i"
+-->((i++))
+-->done
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ while read var
+> do
+> $var
+> done<cmd.txt
+ 20:09:24 up 14:11,  0 users,  load average: 0.52, 0.58, 0.59
+  PID TTY          TIME CMD
+    8 tty1     00:00:02 bash
+  286 tty1     00:00:00 ps
+Linux 4.4.0-19041-Microsoft
+Thu Nov 17 20:09:27 IST 2022
+"Thank you"
+[adbaby@ADBABY-IN shell_program]$
+
+
+Another sytle of file Operation:
+-----------------------------
+[adbaby@ADBABY-IN shell_program]$ cat cmd.txt | while read var;
+> do
+> $var
+> done
+ 20:10:49 up 14:12,  0 users,  load average: 0.52, 0.58, 0.59
+  PID TTY          TIME CMD
+    8 tty1     00:00:02 bash
+  291 tty1     00:00:00 bash
+  293 tty1     00:00:00 ps
+Linux 4.4.0-19041-Microsoft
+Thu Nov 17 20:10:52 IST 2022
+"Thank you"
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+eval command:
+---------------
+if you want to pass the commands in argument style then we can use eval command.
+
+eg.
+
+[adbaby@ADBABY-IN shell_program]$ eval "date"  
+Thu Nov 17 20:13:10 IST 2022
+[adbaby@ADBABY-IN shell_program]$ echo "date"  <<<<<<<< here date is considered as string only.
+date
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+2. from script --> create a new file and write data to file.
+
+syntax:
+-------
+
+while read var  #interface to STD IN string.
+do
+   ....(do some operation)
+done >newfile
+     >>newfile (append operation)
+
+
+
+read from keyboard to script, from script we are wrinting to file
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fh_create.sh
+     1  while read -p "enter a serer name and IP:" var
+     2  do
+     3          echo "server details:" $var
+     4          echo
+     5  done >r1.log
+[adbaby@ADBABY-IN shell_program]$ ./fh_create.sh
+enter a serer name and IP:host1 10.10.0.1
+enter a serer name and IP:host2 10.10.0.2
+enter a serer name and IP:host3 10.10.0.3
+enter a serer name and IP:host4 10.10.0.4
+enter a serer name and IP:host5 10.10.0.5
+enter a serer name and IP:^C[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$ cat r1.log
+server details: host1 10.10.0.1
+
+server details: host2 10.10.0.2
+
+server details: host3 10.10.0.3
+
+server details: host4 10.10.0.4
+
+server details: host5 10.10.0.5
+
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+3. reading data from <onefile> to script --> create or write data to another file.
+
+syntax:
+------
+while read var (2)
+do
+	code block (3)
+done<inputfile >resultfile
+
+      (1)          (4)
+
+
+this is like a copy command.
+copying one file content to another file.
+
+#like cp ip1.txt ip2.txt
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fh_rw.sh
+     1  while read var
+     2  do
+     3          echo "System details:$var"
+     4          echo
+     5  done<cmd.txt >process.log
+[adbaby@ADBABY-IN shell_program]$ cat cmd.txt
+uptime
+ps
+uname -rs
+sleep 3
+date
+echo "Thank you"
+[adbaby@ADBABY-IN shell_program]$ cat process.log
+System details:uptime
+
+System details:ps
+
+System details:uname -rs
+
+System details:sleep 3
+
+System details:date
+
+System details:echo "Thank you"
+
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+
+vi p1.sh +29 -- it will go to the line 29
+
+
+time 42:05
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fh_read_write.sh
+     1  if [ $# -eq 0 ]
+     2  then
+     3          echo "Usage: command line argument is empty"
+     4          echo "$0 <input filename> <result filename>"
+     5          exit
+     6  fi
+     7
+     8  if [ $# -ne 2 ]
+     9  then
+    10          echo "Usage: command line argument allows only two args"
+    11          echo "$0 <input filename> <result filename>"
+    12          exit
+    13  fi
+    14
+    15  if ! [ -f $1 ]
+    16  then
+    17          echo "Input file: $1 is not a regular file"
+    18          exit
+    19  fi
+    20
+    21  if [ "`basename $0`"  == "$1" ]
+    22  then
+    23          echo "Input file and script file both are same"
+    24          exit
+    25  fi
+    26
+    27  while read var
+    28  do
+    29          eval $var
+    30  done<$1 >$2
+[adbaby@ADBABY-IN shell_program]$
+
+[adbaby@ADBABY-IN shell_program]$ ./fh_read_write.sh
+Usage: command line argument is empty
+./fh_read_write.sh <input filename> <result filename>
+[adbaby@ADBABY-IN shell_program]$ ./fh_read_write.sh p3.sh p4.sh p5.sh
+Usage: command line argument allows only two args
+./fh_read_write.sh <input filename> <result filename>
+[adbaby@ADBABY-IN shell_program]$ ./fh_read_write.sh /etc
+Usage: command line argument allows only two args
+./fh_read_write.sh <input filename> <result filename>
+[adbaby@ADBABY-IN shell_program]$ ./fh_read_write.sh /etc pe.sh
+Input file: /etc is not a regular file
+[adbaby@ADBABY-IN shell_program]$ ./fh_read_write.sh fh_read_write.sh p3.log
+Input file and script file both are same
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$ ./fh_read_write.sh cmd.txt r3.log
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$ cat r3.txt
+ 11:01:53 up  4:38,  0 users,  load average: 0.52, 0.58, 0.59
+  PID TTY          TIME CMD
+    8 tty1     00:00:00 bash
+  121 tty1     00:00:00 bash
+  124 tty1     00:00:00 ps
+Linux 4.4.0-19041-Microsoft
+Sat Nov 19 11:01:56 IST 2022
+Thank you
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+[adbaby@ADBABY-IN shell_program]$ date | while read -a var; do echo "${var[0]} ${var[-1]}"; done
+Sat 2022
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN env]$ ps | while read -a var; do echo -e "${var[-1]}\t ${var[0]}"; done
+CMD      PID
+bash     8
+ps       286
+bash     287
+[adbaby@ADBABY-IN env]$
+
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fh_read_counnt.sh
+     1  c=0
+     2  while read var
+     3  do
+     4  echo "$((++c)) $var"
+     5  done <$1
+[adbaby@ADBABY-IN shell_program]$ ./fh_read_counnt.sh cmd.txt
+1 uptime
+2 ps
+3 uname -rs
+4 sleep 3
+5 date
+6 echo "Thank you"
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fh_read_counnt.sh
+     1  if [ $# -ne 1 ]
+     2  then
+     3          echo "usage:commadline arg error"
+     4          echo "$0 <input file>"
+     5          exit
+     6  fi
+     7
+     8  if ! [ -f $1 ]
+     9  then
+    10          echo "Input file is not a reg.file"
+    11          exit
+    12  fi
+    13
+    14  c=0
+    15  while read var
+    16  do
+    17          if [ $c -eq 5 ]
+    18          then
+    19                  break
+    20
+    21          else
+    22                  echo  "$((++c)) $var"
+    23          fi
+    24  done <$1
+[adbaby@ADBABY-IN shell_program]$ ./fh_read_counnt.sh /etc/passwd
+1 root:x:0:0:root:/root:/bin/bash
+2 bin:x:1:1:bin:/bin:/sbin/nologin
+3 daemon:x:2:2:daemon:/sbin:/sbin/nologin
+4 adm:x:3:4:adm:/var/adm:/sbin/nologin
+5 lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ echo "root:x:0:0:root:/root:/bin/bash" | tr ':' ' '
+root x 0 0 root /root /bin/bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ echo "root:x:0:0:root:/root:/bin/bash" | tr ':' ' ' | tr '/' ' '
+root x 0 0 root  root  bin bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ a=(`echo "root:x:0:0:root:/root:/bin/bash" | tr ':' ' ' | tr '/' ' '`)
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ echo "${a[@]}"
+root x 0 0 root root bin bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ echo "root:x:0:0:root:/root:/bin/bash" | tr ':' ' ' | tr '/' ' ' | while read -a var; do echo ${var[-1]}; done
+bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+cp -i -- interactive mode.
+	 overwrite or not
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fh_cp_i.sh
+     1  if [ $# -ne 2 ]
+     2  then
+     3          echo "Usage: commandline arg error"
+     4          echo "$0 <input filename> <log file>"
+     5          exit
+     6  fi
+     7
+     8  if ! [ -f $1 ]
+     9  then
+    10          echo "Input file $1 is not a reg file"
+    11          exit
+    12  fi
+    13
+    14  if [ -e $2 ]
+    15  then
+    16          read -p "Overwrite $2 ?" choice
+    17          if [ $choice == "y" -o $choice == "yes" ]
+    18          then
+    19                  while read var
+    20                  do
+    21                          echo "$var"
+    22                  done <$1 >$2
+    23          else
+    24                  exit
+    25          fi
+    26  else
+    27          while read var
+    28          do
+    29          echo "$var"
+    30          done <$1 >$2
+    31
+    32  fi
+    33
+[adbaby@ADBABY-IN shell_program]$
+
+
+Function: 
+---------
+Purpose of function is to avoid code duplication.
+we can omit the duplication of the code.
+
+syntax:
+-------
+function functionname()
+{
+	code block
+}
+
+function keyword is optional.
+
+or
+
+function_name()
+{
+	code block
+}
+
+
+how to call this function definition.
+--------------------------------------
+just mention the functionname
+
+eg. functionname
+
+
+f1()
+{ 
+  echo "list of files:"
+  ls -l
+}
+
+f2()
+{
+  echo "list of process"
+  ps -ef
+}
+
+
+echo "main script"
+f1
+f2
+f1
+f2
+f1
+
+
+
+function definition will be on the top.
+function call will be on the bottom.
+
+bottom to top approach.
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_list1.sh
+     1  f1()
+     2  {
+     3          echo "this is f1 block"
+     4          echo "list of files"
+     5          ls -l *.log
+     6          echo "exit from f1 block"
+     7  }
+     8
+     9  f2()
+    10  {
+    11          echo "This is f2 block"
+    12          echo "current process details"
+    13          ps -ef
+    14          echo"exit from f2 block"
+    15  }
+    16
+    17  f3()
+    18  {
+    19          echo "This is f3 block"
+    20          echo "filesystem details"
+    21          df -h
+    22          echo "exit from f3 block"
+    23  }
+    24
+    25  echo "main script file"
+    26  f1
+    27  sleep 2
+    28  f2
+    29  sleep 1
+    30  f3
+    31  sleep 2
+    32  f2
+    33  f3
+    34  echo "exit from main script"
+    35
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+nested call
+-----------
+function inside another function.
+
+$FUNCNAME - this variable replace function name.
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_nested.sh
+     1  fx()
+     2  {
+     3          echo "This is $FUNCNAME block"
+     4          fy
+     5          echo "exit from $FUNCNAME block"
+     6  }
+     7
+     8  fy()
+     9  {
+    10          echo "This is $FUNCNAME block"
+    11          date
+    12          echo "Exit from $FUNCNAME block"
+    13  }
+    14  fx
+    15  echo "exit from `basename $0` script"
+[adbaby@ADBABY-IN shell_program]$ ./fn_nested.sh
+This is fx block
+This is fy block
+Sat Nov 19 21:35:48 IST 2022
+Exit from fy block
+exit from fx block
+exit from fn_nested.sh script
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_select_menu.sh
+     1  PS3="enter your choice"
+     2  sysinfo(){
+     3          echo "Kernal name: `uname`"
+     4          echo "Kernal Version: `uname -r`"
+     5  }
+     6  fsinfo(){
+     7          echo "filesystem details"
+     8          df -Th
+     9  }
+    10  login(){
+    11          echo "login name: `whoami`"
+    12          echo "login id: $UID"
+    13          echo "login path: $PATH"
+    14  }
+    15  display(){
+    16          echo "working directory: $PWD"
+    17          echo "Today: `date` +%D"
+    18
+    19  }
+    20  quit(){
+    21          exit
+    22  }
+    23
+    24  select var in sysinfo fsinfo login display quit
+    25  do
+    26          case $var in
+    27          sysinfo) sysinfo ;;
+    28          fsinfo)  fsinfo  ;;
+    29          login)   login   ;;
+    30          display) display ;;
+    31          quit)    quit    ;;
+    32          *)      echo "Invalid choice - Try again"
+    33          esac
+    34  done
+    35
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ ./fn_select_menu.sh
+1) sysinfo
+2) fsinfo
+3) login
+4) display
+5) quit
+enter your choice1
+Kernal name: Linux
+Kernal Version: 4.4.0-19041-Microsoft
+enter your choice2
+filesystem details
+Filesystem     Type   Size  Used Avail Use% Mounted on
+rootfs         wslfs  233G  192G   42G  83% /
+none           tmpfs  233G  192G   42G  83% /dev
+none           tmpfs  233G  192G   42G  83% /run
+none           tmpfs  233G  192G   42G  83% /run/lock
+none           tmpfs  233G  192G   42G  83% /run/shm
+none           tmpfs  233G  192G   42G  83% /run/user
+tmpfs          tmpfs  233G  192G   42G  83% /sys/fs/cgroup
+C:\            drvfs  233G  192G   42G  83% /mnt/c
+enter your choice3
+login name: adbaby
+login id: 1000
+login path: /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/anaconda3/bin:/usr/local/mongodb/bin
+enter your choice4
+working directory: /home/adbaby/AWK/shell_program
+Today: Sat Nov 19 22:00:44 IST 2022 +%D
+enter your choice5
+[adbaby@ADBABY-IN shell_program]$
+
+How to pass argument to function.
+----------------------------------
+functionname arg1 arg2 argN
+ 
+In commandLIne args - $1 is the 1st argument
+In function call args - $1 is the 1st argument in function call
+
+
+display()
+{
+	echo "file name:$1
+	      file name:$2
+	      total No. of files:$#"
+}
+display			 # simple function call.
+
+display p1.sh p2.sh 	 # function call with argument
+
+-------------------
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_call_args.sh
+     1  display()
+     2  {
+     3  echo "file name: $1
+     4        file name: $2
+     5        Total No. of files: $#"
+     6  echo "Exit from $FUNCNAME block"
+     7  }
+     8  display
+     9  sleep 3
+    10  display p1.sh p2.sh p3.sh p4.sh p5.sh
+    11  echo "Exit from $0 script file"
+    12
+[adbaby@ADBABY-IN shell_program]$
+
+[adbaby@ADBABY-IN shell_program]$ ./fn_call_args.sh
+file name:
+      file name:
+      Total No. of files: 0
+Exit from display block
+file name: p1.sh
+      file name: p2.sh
+      Total No. of files: 5
+Exit from display block
+Exit from ./fn_call_args.sh script file
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_sum2.sh
+     1  fx()
+     2  {
+     3          sum=`expr $1 + $2`
+     4          fy $sum
+     5  }
+     6  fy()
+     7  {
+     8          echo "sum of two no. is: $sum"
+     9  }
+    10  fx $1 $2
+[adbaby@ADBABY-IN shell_program]$ ./fn_sum2.sh 10 10
+sum of two no. is: 20
+[adbaby@ADBABY-IN shell_program]$ ./fn_sum2.sh 100 100
+sum of two no. is: 200
+[adbaby@ADBABY-IN shell_program]$ ./fn_sum2.sh 2000 100
+sum of two no. is: 2100
+[adbaby@ADBABY-IN shell_program]$
+
+	
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_3args.sh
+     1  fx()
+     2  {
+     3          echo $1 $2 $2
+     4          for v in $@
+     5          do
+     6                  echo "->$v"
+     7          done
+     8          echo "Total no. of args:" $#
+     9          echo "Exit from $FUNCNAME block"
+    10  }
+    11
+    12  fy()
+    13  {
+    14          echo $1 $2 $3
+    15          for v in $@
+    16          do
+    17                  echo "->$v"
+    18          done
+    19          echo "Total No.of args:" $#
+    20          echo "Exit from $FUNCNAME block"
+    21  }
+    22  fx f1 f2 f3 f4 f5
+    23  sleep 3
+    24  fy 1 2 3 4 5 6
+    25  sleep 3
+    26  echo
+    27
+[adbaby@ADBABY-IN shell_program]$ ./fn_3args.sh
+f1 f2 f2
+->f1
+->f2
+->f3
+->f4
+->f5
+Total no. of args: 5
+Exit from fx block
+1 2 3
+->1
+->2
+->3
+->4
+->5
+->6
+Total No.of args: 6
+Exit from fy block
+
+[adbaby@ADBABY-IN shell_program]$
+
+scope of the data variable:
+---------------------------
+
+by default function variables are global scope.
+
+we can define variable inside functon and access outside
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_var.sh
+     1  port=1234
+     2  fx()
+     3  {
+     4          echo "Port No. is:" $port
+     5  }
+     6  fx
+[adbaby@ADBABY-IN shell_program]$ ./fn_var.sh
+Port No. is: 1234
+[adbaby@ADBABY-IN shell_program]$
+
+local - keyword - inside function only.
+-----
+
+fx(){
+	local port=1000
+	echo "port number is:$port"
+}
+fx
+echo "main section script - $port
+
+ a(){
+          local port=1234
+          echo "port number is: $port"
+   }
+a
+echo "main script - $port"
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ ./fn_var.sh
+port number is: 1234
+main script -
+[adbaby@ADBABY-IN shell_program]$
+
+
+return - is a keyword we can use within the function. exit from function definition.
+	we can't use outside function.
+
+return $var
+
+
+exit - we can use anywhere inside the script.
+
+break - is a shell keyword, exit from looping statement.
+- we can't use break outside the loop
+
+
+
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_return.sh
+     1  fx(){
+     2          echo "one
+     3                two
+     4                three"
+     5          return
+     6          echo   "  four"
+     7          echo "five"
+     8  }
+     9  fx
+    10
+[adbaby@ADBABY-IN shell_program]$ ./fn_return.sh
+              one
+              two
+              three
+[adbaby@ADBABY-IN shell_program]$
+
+
+fuction call with argument:
+---------------------------
+
+[adbaby@ADBABY-IN shell_program]$ cat -n fn_callwitharg.sh
+     1  nametest()
+     2  {
+     3          name=$1
+     4          if [ $name == "admin" ]
+     5          then
+     6                  return 0
+     7          else
+     8                  return 1
+     9          fi
+    10  }
+    11
+    12  read -p "enter a login name:" name
+    13  nametest $name
+    14
+    15  if [ $? -eq 0 ]
+    16  then
+    17          echo "login is matched"
+    18  else
+    19          echo "Sorry you are not admin"
+    20  fi
+[adbaby@ADBABY-IN shell_program]$
+
+[adbaby@ADBABY-IN shell_program]$ ./fn_callwitharg.sh
+enter a login name:mamam
+Sorry you are not admin
+[adbaby@ADBABY-IN shell_program]$ ./fn_callwitharg.sh admin
+enter a login name:admin
+login is matched
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[root@ADBABY-IN shell_program]# cat -n fn_test_user.sh
+     1  testUser()
+     2  {
+     3          if [ `whoami` == "root" ]
+     4          then
+     5                  echo "Login as root user"
+     6          else
+     7                  echo "sorry, you are not root user"
+     8                  exit
+     9          fi
+    10  }
+    11
+    12  testpkg()
+    13  {
+    14          read -p "enter a package name:" pkg
+    15          which $pkg
+    16          if [ $? -eq 0 ]
+    17          then
+    18                  echo "Package already exist"
+    19          fi
+    20
+    21          if [ $? -ne 0 ]
+    22          then
+    23                  yum install -y $pkg > pkg.log
+    24                  echo "Pkg installation status is: $?"
+    25          fi
+    26  }
+    27
+    28  display()
+    29  {
+    30          echo "package information"
+    31          rpm -qi $pkg
+    32  }
+    33  pkginstall()
+    34  {
+    35          echo "Installing $pkg"
+    36          yum install -y $pkg > pkg_install.log
+    37          which $pkg
+    38          echo "installation $pkg completed successfully"
+    39
+    40  }
+    41
+    42  testUser
+    43  testpkg
+    44  display
+    45  pkginstall
+    46
+    47
+[root@ADBABY-IN shell_program]#
+
+[root@ADBABY-IN shell_program]# ./fn_test_user.sh
+Login as root user
+enter a package name:expect
+which: no expect in (/root/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/anaconda3/bin:/usr/local/mongodb/bin:/home/adbaby/work/pic-tools/scripts/bin:/root/.local/bin:/root/bin:/home/adbaby/work/pic-tools/scripts/bin)
+package information
+package expect is not installed
+Installing expect
+/usr/bin/expect
+installation expect completed successfully
+[root@ADBABY-IN shell_program]#
+
+
+[root@ADBABY-IN shell_program]# cat -n fn_pkg_read_install.sh
+     1  while read var
+     2  do
+     3          rpm -q $var >/dev/null 2>&1
+     4          if [ $? -eq 0 ]
+     5          then
+     6                  echo "Package $var already installed"
+     7                  sleep 2
+     8                  rpm -qi $var
+     9          else
+    10                  echo "Package $var not installed"
+    11                  yum install -y $var >/var/log/repo.log
+    12                  if [ $? -eq 0 ]
+    13                  then
+    14                          echo "package $var is installed"
+    15                  else
+    16                          echo "package $var installation is failed"
+    17                          echo "refer /var/log/repo.log file"
+    18
+    19                  fi
+    20          fi
+    21  done<pk_info.log
+    22
+[root@ADBABY-IN shell_program]#
+
+
+source script file from one file to another: script reuseability
+---------------------------------------------
+
+file: ab.sh <<<<<< loadble file or runnable file
+---------------
+fx(){
+	eval "ls -l"
+	eval "ps -f"
+	eval "uptime"
+	eval "lsmod"
+}
+
+			ab.sh
+                          |
+       --------------------------------------------------
+	|       |         |       |       |        |     |
+	p1.sh    p2.sh     p3.sh   p4.sh   p5.sh   p6.sh  p7.sh    <<<<<<<<<< script file
+
+
+file: p1.sh
+source ab.sh
+fx
+
+
+source is equilent to import or include followed by file name .sh
+
+. means current name space.
+
+.<space>script file path
+eg: . /home/adbaby/AWK/shellscripting/p1.sh 
+
+
+1. source<space>script file path
+   source /home/adbaby/AWK/shellscripting/p1.sh 
+
+2. .<space>script file path
+    . /home/adbaby/AWK/shellscripting/p1.sh   file must be executable.
+
+
+
+we can use it in script definition dont use function call.
+
+
+[root@ADBABY-IN shell_program]# cat -n ab.sh
+     1  app_port=1234
+     2  config_file="/etc/prometheus/prometheus.conf"
+     3
+     4  fx(){
+     5          echo "This is $FUNCNAME call from `basename $0` script file"
+     6
+     7  }
+     8
+     9  fy(){
+    10          return 0
+    11  }
+[root@ADBABY-IN shell_program]# cat -n fn_loadble.sh
+     1  . /home/adbaby/AWK/shell_program/ab.sh
+     2  fx
+     3  echo "App port No. is: $app_port"
+     4  echo "App config file is: $config_file"
+     5
+[root@ADBABY-IN shell_program]# ./fn_loadble.sh
+This is fx call from fn_loadble.sh script file
+App port No. is: 1234
+App config file is: /etc/prometheus/prometheus.conf
+[root@ADBABY-IN shell_program]#
+
+
+[root@ADBABY-IN shell_program]# cat -n fn_loadble_ret.sh
+     1  . ./ab.sh
+     2  echo "app port number is: $app_port"
+     3  fy
+     4  echo "Return value is: $?"
+[root@ADBABY-IN shell_program]# ./fn_loadble_ret.sh
+app port number is: 1234
+Return value is: 120
+[root@ADBABY-IN shell_program]#
+
+
+[root@ADBABY-IN shell_program]# if pidof ps;then
+> echo "Yes"
+> else
+> echo "No"
+> fi
+No
+[root@ADBABY-IN shell_program]#
+
+
+
+[root@ADBABY-IN shell_program]# if pidof ps;then
+> echo "Yes"
+> else
+> echo "No"
+> fi
+No
+[root@ADBABY-IN shell_program]# fx(){
+> local r=`expr $1 + $2`
+> return $r
+> }
+[root@ADBABY-IN shell_program]# fx 10 20
+[root@ADBABY-IN shell_program]# echo $?
+30
+[root@ADBABY-IN shell_program]#
+
+
+if we want to use function definition in a subshell we have to export the function as below.
+
+export -f functionname
+eg. export -f fx
+
+global configuration file:
+-------------------------
+/etc/profile - it is editable by root user. - this is the permenent update.
+
+export port=9090
+
+
+.bashrc
+
+fx(){
+...
+...
+}
+export -f fx
+:wq!
+
+
+adbaby@host~]$ env | grep port
+port=9090
+
+adbaby@host~]$ echo $port
+port=9090
+
+
+grep - search & display the matched pattern line.
+--------------------------------------------------
+
+syntax:
+--------
+grep -option pattern inputfile (one or more inputfile)
+
+grep -n - it will display pattern with line number.
+
+-n - display the line number
+-i - ignore the case
+-c - count the No. of patterns
+-v - not matching pattern
+-e - extended pattern or multi pattern
+-l - list a matched pattern filename.
+-R - recursive pattern search
+-w - word based search, 
+-q - quit mode, it wont print matched pattern. use echo $? for the status code.
+-o - matched pattern output string.
+
+[root@ADBABY-IN shell_program]# if [ `ps -e | grep -ic bash` -gt 10 ];
+> then
+> echo "more than 10 bash process are running"
+> else
+> echo "list of bash process PIDs"
+> pidof bash
+> fi
+list of bash process PIDs
+87 8
+[root@ADBABY-IN shell_program]#
+
+multiple pattern concept:
+------------------------
+
+grep -E "sales|prod|QA" emp.csv | we can use multiple patterns.
+
+or
+
+egrep -n "sales|prod|QA" emp.csv
+
+grep -l sales * - it will list the matched pattern files.
+
+grep -l pin *
+
+grep -lR pin .
+
+grep -liR pin .
+
+grep -w "file" <inputfile> - word based search
+
+grep -q sales emp.csv  -- it wont print any seatch pattern.
+
+grep - q or we can redirect to /dev/null -- it wont proint any pattern.
+
+it will show you the status code. we dont want output, just to check the pattern is there or not.
+
+echo $?
+
+
+
+just want to check httpd is running or not.
+
+ps -e | grep -q httpd
+echo $?
+
+
+
+host~]$ grep -o sales emp.csv
+sales
+sales
+sales
+
+
+Regular expression:
+-------------------
+
+search - grep , sed , awk
+
+substitute - sed
+
+1. Basic regular expression (BRE)
+---------------------------------
+
+  - single pattern
+
+2. Extended regular expression (ERE)
+--------------------------------------
+
+  - finding more than one pattern or multiple pattern.
+
+characters used for search: Basic regular expression (BRE) symbols
+--------------------------  -------------------------------------------
+
+^ - cap symbol
+
+$ - dollar symbol
+
+
+^pattern$ - cap pattern dollar symbol
+
+
+. - dot
+
+.* - dot with star combination.
+
+[] - character class
+
+^[] - starts with character
+
+[]$ - ends with character
+
+
+[^ ] - not matching the character.
+
+
+^$  - empty line
+
+
+
+Extended regular expression (ERE) symbols: grep -E ; sed -r 
+-------------------------------------------
+
+| - pipe symbol is called alternate option
+
+() - compound symbol
+
++  - one or more repetition.
+
+{} - regular expression. we can use min range max range.
+
+
+
+BRE
+----
+^pattern - line begin with pattern
+
+
+[adbaby@ADBABY-IN shell_program]$ grep -n "^bash" search_items  -- it will give the pattern line starts with "bash"
+2:bash:x:bin
+4:bash:
+5:bash,
+7:bash
+8:bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+line starts with character b
+
+[adbaby@ADBABY-IN shell_program]$ grep -n "^b" search_items
+2:bash:x:bin
+4:bash:
+5:bash,
+7:bash
+8:bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+line starts with space character.
+
+[adbaby@ADBABY-IN shell_program]$ grep -n "^ " search_items
+9: bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+list all the directory type file:
+
+[adbaby@ADBABY-IN ~]$ ls -l | grep "^d"
+drwxrwxr-x 1 adbaby adbaby   4096 Nov 16 16:10 AWK
+drwxrwxr-x 1 adbaby adbaby   4096 Sep 12 13:24 cli-wrapper
+drwxr-xr-x 1 root   root     4096 Jul  8 10:25 exat2
+drwxr-xr-x 1 root   root     4096 Jul  8 10:25 regional-bastion-list
+drwxr-xr-x 1 root   root     4096 Jul  8 10:25 sparta-pki
+drwxrwxr-x 1 adbaby adbaby   4096 Jul 12 10:45 sparta_roots
+drwxr-xr-x 1 root   root     4096 Jul 16 12:16 ssh_configs
+drwxr-xr-x 1 root   root     4096 Jul 15 09:55 work
+[adbaby@ADBABY-IN ~]$
+
+
+[adbaby@ADBABY-IN ~]$ ls -l | grep -c  "^d"
+8
+[adbaby@ADBABY-IN ~]$
+
+
+R - recursive - it will check the sub directories as well.
+
+[adbaby@ADBABY-IN ~]$ ls -lR | grep -c  "^d"
+1549
+[adbaby@ADBABY-IN ~]$
+
+
+
+$  ==> pattern$  - line ends with pattern
+
+
+
+[adbaby@ADBABY-IN shell_program]$ grep -n bash$ search_items
+1:root:x:bin:bash
+3:userA:bash
+6:userB:bash
+7:bash
+8:bash
+9: bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+process ends with t
+
+[adbaby@ADBABY-IN shell_program]$ ps -e | grep t$
+    1 ?        00:00:00 init
+    7 tty1     00:00:00 init
+[adbaby@ADBABY-IN shell_program]$ ps -e | grep -c t$
+2
+[adbaby@ADBABY-IN shell_program]$
+
+
+it will search pattern ends with space.
+
+grep -n " "$ search_items
+
+
+it will search pattern begins with space.
+
+[adbaby@ADBABY-IN shell_program]$ grep -n ^" " search_items
+9: bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+it will search pattern with space
+
+[adbaby@ADBABY-IN shell_program]$ grep -n " " search_items
+9: bash
+10:unix bash shell
+[adbaby@ADBABY-IN shell_program]$
+
+
+^pattern$ ==> pattern only style . Lines which contains exactly the pattern.
+
+
+
+lines which contain only bash
+
+[adbaby@ADBABY-IN shell_program]$ grep -n ^bash$ search_items
+7:bash
+8:bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+.(dot) ==> match any single character except \n character.
+
+
+A-Za-z0-9space spcl char  but not \n char.
+
+
+line ends with any two character ..$
+
+[adbaby@ADBABY-IN shell_program]$ ps | grep ..$
+  PID TTY          TIME CMD
+    8 tty1     00:00:01 bash
+  441 tty1     00:00:00 ps
+  442 tty1     00:00:00 grep
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+line starts with any three characters.
+
+[adbaby@ADBABY-IN shell_program]$ date | grep ^...
+Tue Nov 22 18:47:04 IST 2022
+[adbaby@ADBABY-IN shell_program]$
+
+
+. () ==> one dot means one character.
+..  ==> two dot means two character.
+
+
+line starts with bash and ends with any one character.
+
+[adbaby@ADBABY-IN shell_program]$ grep -n ^bash. search_items
+2:bash:x:bin
+4:bash:
+5:bash,
+[adbaby@ADBABY-IN shell_program]$
+
+
+line which contain bash followed by any single character.
+
+[adbaby@ADBABY-IN shell_program]$ grep -n ^bash.$ search_items
+4:bash:
+5:bash,
+[adbaby@ADBABY-IN shell_program]$
+
+.* ==> any character followed by list of all.
+
+* ==> zero or more occurance.
+
+
+
+
+line start with space followed by 2.
+
+ps -e | grep "^ 2"
+
+
+
+
+
+
+line starts with 2 followed by any single character.
+ps -e | grep "^2."
+
+
+line starts with character a
+
+[root@ansible-c Desktop]# grep -n "^a" /etc/passwd
+4:adm:x:3:4:adm:/var/adm:/sbin/nologin
+29:avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+51:adarsh:x:1001:1001::/home/adarsh:/bin/bash
+[root@ansible-c Desktop]# 
+
+
+
+[root@ansible-c Desktop]# grep -n "^a" /etc/passwd
+4:adm:x:3:4:adm:/var/adm:/sbin/nologin
+29:avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+51:adarsh:x:1001:1001::/home/adarsh:/bin/bash
+[root@ansible-c Desktop]# grep -n "^a." /etc/passwd
+4:adm:x:3:4:adm:/var/adm:/sbin/nologin
+29:avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+51:adarsh:x:1001:1001::/home/adarsh:/bin/bash
+[root@ansible-c Desktop]# grep -n "^a.*" /etc/passwd
+4:adm:x:3:4:adm:/var/adm:/sbin/nologin
+29:avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+51:adarsh:x:1001:1001::/home/adarsh:/bin/bash
+[root@ansible-c Desktop]# 
+
+
+[root@ansible-c Desktop]# grep -n "^a.*daemon" /etc/passwd
+29:avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+[root@ansible-c Desktop]#
+
+
+
+if we dont know the pattern we can put .*
+
+grep -n "^a.*daemon.*bin" /etc/passwd
+
+
+[root@ansible-c Desktop]# grep -n "^a.*daemon.*bin" /etc/passwd
+29:avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+[root@ansible-c Desktop]# grep -n "^a.*daemon.*bin.*in" /etc/passwd
+29:avahi:x:70:70:Avahi mDNS/DNS-SD Stack:/var/run/avahi-daemon:/sbin/nologin
+[root@ansible-c Desktop]# 
+
+
+[] -- character class.
+
+mainly used for character based search.
+
+[Ll]inux 
+--------->> Linux linux 
+		|_______matched pattern
+
+
+^[][][]$
+one sq. bracket one character
+two sq. bracket two character
+three sq. bracket three character
+four sq. bracket four character
+
+[Aakv][Rr]un ___________
+___   --2nd char        |__combination of substring.
+|_1st ch
+
+
+ARun
+Arun
+aRun
+arun
+kRun
+krun
+vRun
+vrun
+------// matched pattern.
+
+
+
+^[AabB].*[sh]$
+
+meaning
+--------
+line starts with char 'A' followed by list of all ends with char 's' or 'h'
+		      'a'
+		      'b'
+		      'B'                                      
+
+
+
+process name ends with character 'd' 'a' 't' 'a'
+
+[root@ansible-c Desktop]# ps -ef | grep [data]$
+root         717       1  0 19:01 ?        00:00:03 /usr/lib/systemd/systemd-journald
+root         754       1  0 19:01 ?        00:00:00 /usr/lib/systemd/systemd-udevd
+root         856       1  0 19:01 ?        00:00:00 /sbin/auditd
+root         897       1  0 19:01 ?        00:00:00 /usr/libexec/udisks2/udisksd
+root         898       1  0 19:01 ?        00:00:00 /usr/sbin/mcelog --ignorenodev --daemon --foreground
+root         904       1  0 19:01 ?        00:00:00 /usr/sbin/irqbalance --foreground
+libstor+     908       1  0 19:01 ?        00:00:00 /usr/bin/lsmd -d
+root         912       1  0 19:01 ?        00:00:00 /usr/lib/systemd/systemd-machined
+chrony       920       1  0 19:01 ?        00:00:00 /usr/sbin/chronyd
+root         926       1  0 19:01 ?        00:00:00 /bin/bash /usr/sbin/ksmtuned
+
+
+
+process name ends with data
+
+[root@ansible-c Desktop]# ps -ef | grep data$
+root        3273    2675  0 19:02 ?        00:00:00 /usr/libexec/gvfsd-metadata
+[root@ansible-c Desktop]# 
+
+
+below are the range of character class. []
+-------------------------------------------
+
+[a-z] - it match any lower case characters.
+
+[A-Z] - it match any upper case characters
+
+[a-zA-Z] - it match any alpha
+
+[0-9]  - match any number
+
+^[a-zA-Z] - line starts with any alpha.
+
+[a-zA-Z0-9] - match any alpha and number.
+
+
+[0-9]$ - line ends with any digit.
+
+[a-zA-Z0-9]$ - line ends with any alpha and number.
+
+
+
+character class     	or 		posix class.
+
+
+[a-z]					[[:upper:]]
+[A-Z]					[[:lower:]]
+
+					[[:upper:]]$ - line at the end single upper case character.
+
+[a-zA-Z]				[[:alpha:]]  - it is  a combination of upper lower.
+
+
+[0-9]					[[:digit:]] - it will match any number.
+
+
+[a-zA-Z0-9]				[[:alnum:]] - alpha and number.
+
+" "					[[:space:]]
+
+
+
+
+[root@ansible-c Desktop]# ps -ef | grep "[[:upper:]]$"
+UID          PID    PPID  C STIME TTY          TIME CMD
+root        1067       1  0 19:01 ?        00:00:36 /usr/libexec/platform-python -Es /usr/sbin/tuned -l -P
+root        1086       1  0 19:01 ?        00:00:00 /usr/sbin/gssproxy -D
+[root@ansible-c Desktop]# 
+
+
+ps -ef | grep "[A-Z]"
+ps -ef | grep "[a-z]"
+
+
+[root@ansible-c Desktop]# ps -ef | grep " "
+
+
+[root@ansible-c Desktop]# ps -ef | grep "[[:upper:]]$"
+UID          PID    PPID  C STIME TTY          TIME CMD
+root        1067       1  0 19:01 ?        00:00:36 /usr/libexec/platform-python -Es /usr/sbin/tuned -l -P
+root        1086       1  0 19:01 ?        00:00:00 /usr/sbin/gssproxy -D
+[root@ansible-c Desktop]# 
+
+
+
+line start with space
+ps | grep "^[[:space:]]"
+
+
+^[a5t] - line start with char 'a' '5' 't'
+
+[^a5t] - not match with char 'a' '5' 't'
+-------
+not operation
+
+
+[a-z] - match any lower case.
+^[a-z] - line start with any lower case.
+[^a-z] - not match any lower case.
+
+[^a-zA-Z0-9' '] - not match any alpha numeric and space.  [[:punct:]]
+		  match only the special characters.
+
+
+[root@ansible-c Desktop]# ps -ef | grep "[[:punct:]]"
+
+[root@ansible-c Desktop]# ps -ef | grep "[^a-zA-Z0-9 ' ']"   -- it will filter the unformatted data.
+
+empty line:(^$)
+----------
+
+^$ -- it will match the empty line.
+
+
+cat process.log | grep -n "^$"
+
+cat process.log | grep -nv "^$" -- it will omit the empty line.
+
+
+
+
+ERE
+----
+|
+
+()
+
++
+
+{}
+
+
+line start with upper and lower case char followed by list of all lowercase or numeric at the end.
+
+[root@ansible-c day3]# grep -n "^[A-Za-z].*[a-z0-9]$" emp.csv 
+1:ram,sales,pune,1000
+2:ashi,prod,bglore,2345
+3:xerox,sales,chennai,45900
+4:yahoo,prod,pune,32450
+5:anu,HR,hyd,4560
+6:biju,prod,bglore,4567
+7:vijay,hr,chennai,3453
+8:theeb,sales,hyd,5678
+9:nithin,prod,pune,1236
+[root@ansible-c day3]#
+
+
+[root@ansible-c day3]# grep -n ^[[:alnum:]] emp.csv
+1:ram,sales,pune,1000
+2:ashi,prod,bglore,2345
+3:xerox,sales,chennai,45900
+4:yahoo,prod,pune,32450
+5:anu,HR,hyd,4560
+6:biju,prod,bglore,4567
+7:vijay,hr,chennai,3453
+8:theeb,sales,hyd,5678
+9:nithin,prod,pune,1236
+[root@ansible-c day3]# grep -n ^[[:lower:]] emp.csv
+1:ram,sales,pune,1000
+2:ashi,prod,bglore,2345
+3:xerox,sales,chennai,45900
+4:yahoo,prod,pune,32450
+5:anu,HR,hyd,4560
+6:biju,prod,bglore,4567
+7:vijay,hr,chennai,3453
+8:theeb,sales,hyd,5678
+9:nithin,prod,pune,1236
+[root@ansible-c day3]# grep -n ^[[:upper:]] emp.csv
+[root@ansible-c day3]# grep -n ^[[:space:]] emp.csv
+[root@ansible-c day3]# 
+
+
+---------------
+pattern1|pattern2|pattern3|pattern4|pattern5
+..............................................//anyone pattern is matched --> true.
+
+- E - is for extended regular expression.
+
+grep -nE sales$|^[A-Za-z].*[a-z]$|^[[:space:]]" IP
+
+
+
+grep -E "^[a-d]|00$|^[a-zA-Z].*prod.*pune.*[0-9]$
+
+
+
+[root@ansible-c day3]# grep -nE "^[a-d]|00$|^[a-zA-Z].*prod.*pune.*[0-9]$" emp.csv 
+1:ram,sales,pune,1000
+2:ashi,prod,bglore,2345
+3:xerox,sales,chennai,45900
+4:yahoo,prod,pune,32450
+5:anu,HR,hyd,4560
+6:biju,prod,bglore,4567
+9:nithin,prod,pune,1236
+[root@ansible-c day3]# 
+
+
+compound sytle:
+-----------------
+(pattern1)(pattern2)
+---------------------//multiple pattern - same order - both pattern should match.
+order of searching and matching is towards left to right.
+
+.(dot) - means it will match any single character.
+
+echo "programming java and python codes"|grep -E "(java).(and)"
+
+
+[root@ansible-c day3]# echo "programming java and python codes"|grep -E "(java).(and)"
+programming java and python codes
+[root@ansible-c day3]# echo "programming java and python codes"|grep -E "(java).(python)"
+[root@ansible-c day3]# echo "programming java and python codes"|grep -E "(java)(python)"
+[root@ansible-c day3]# echo "programming java and python codes"|grep -E "(java)(and)"
+[root@ansible-c day3]# 
+
+
+(pattern1).(pattern2) 
+ |
+  -------------(pattern1)<followed by any single chatacter>(pattern2) from left to right
+
+
+[root@ansible-c day3]# echo "programming java and python codes"|grep -E "(java).*(python)"
+programming java and python codes
+[root@ansible-c day3]# 
+
+
+
+echo "programming java and python codes"|grep -E "(ruby|java).*(python)"
+
+this means - ruby followed by list of all python
+	   - java followed by list of all python
+
+
+one or more repetition style +
+-------------------------------
+
++ --> <pattern>+ ==> pattern repeated min one time maximum no limit.
+
+ab+c ==> a repitition of followed by c
+     >>  abc abbbbbbbbc //matched pattern
+     >>  abbbbbbbbb , bbbbbbbbbc  //not matched
+
+finding one or more space.
+--------------------------
+[[:space:]]+  --> 1 or more space characters.
+
+
+[0-9]+  -->  1 or more digits
+
+^[[:space:]]+ -- line begins with one or more space.
+
+[adbaby@ADBABY-IN ~]$ ps | grep -E "^[[:space:]]+"
+  PID TTY          TIME CMD
+    8 tty1     00:00:00 bash
+   38 tty1     00:00:00 ps
+   39 tty1     00:00:00 grep
+[adbaby@ADBABY-IN ~]$
+
+
+^[[:space:]]+[0-9].*[a-z]$  -- line starts with one or more space followed by single digit<list of all> ends with any lower case characters.
+
+
+[adbaby@ADBABY-IN ~]$ ps | grep -E "^[[:space:]]+[0-9]"
+    8 tty1     00:00:00 bash
+   40 tty1     00:00:00 ps
+   41 tty1     00:00:00 grep
+[adbaby@ADBABY-IN ~]$
+
+[adbaby@ADBABY-IN ~]$ ps | grep -E "^[[:space:]]+[0-9]+"
+    8 tty1     00:00:00 bash
+   42 tty1     00:00:00 ps
+   43 tty1     00:00:00 grep
+[adbaby@ADBABY-IN ~]$
+
+
+[adbaby@ADBABY-IN ~]$ ps | grep -E "^[[:space:]]+[0-9]+.*"
+    8 tty1     00:00:00 bash
+   44 tty1     00:00:00 ps
+   45 tty1     00:00:00 grep
+[adbaby@ADBABY-IN ~]$
+
+email id search:
+----------------
+
+[adbaby@ADBABY-IN ~]$ echo "adarsh.baby@oracle.com" | grep -E ^[a-zA-Z0-9\._]+@[a-z]+\.com$
+adarsh.baby@oracle.com
+[adbaby@ADBABY-IN ~]$
+
+[adbaby@ADBABY-IN ~]$ echo "adarsh.baby@oracle.com" | grep -E ^[a-zA-Z0-9\._]+@[a-z]+\.[a-z]+
+adarsh.baby@oracle.com
+[adbaby@ADBABY-IN ~]$
+
+grouping style:
+----------------
+
+echo "adarsh.baby@oracle.com" | grep -E ^([a-zA-Z0-9\._]+)(@[a-z]+)(\.[a-z]+)$
+
+[adbaby@ADBABY-IN ~]$ ps -e | grep -E "^[[:space:]]+[0-9]+."
+    1 ?        00:00:00 init
+    7 tty1     00:00:00 init
+    8 tty1     00:00:00 bash
+   52 tty1     00:00:00 ps
+   53 tty1     00:00:00 grep
+[adbaby@ADBABY-IN ~]$
+
+
+
+
+{} - range operation
+---------------------
+
+<pattern>{n} - given pattern repeated n times.
+
+ab{2}c = abbc -- a "b" repetation followed by c.
+
+        abc abbbc  //not matched
+
+^[A-Z][A-Z][A-Z][0-9][0-9][0-9][a-z][a-z]$  //BRE - basic reqular expr
+
+----------------------------------------
+
+               |
+		
+	  ^[A-Z]{3}[0-9]{3}[a-z]{2}$  // ERE - extended regular expr
+
+	   line starts with given pattern repeated 3 times, 
+	   followed by given pattern reated 3 times,
+	   followed by given patten repeated 2 times.
+
+
+
+
+
+<pattern>{n,} --> min matched pattern is n times , max no limit.
+
+
+
+ab{2,}c ==> abbc abbbbbbbc // matched
+	    abc // not matched
+
+
+ab+c is same as ab{1,}c
+
+
+
+
+<pattern>{n,m} --> min 'n' times max 'm' times followed by max occurances.
+
+
+ab{2,4}c --> abbc abbbc abbbbc // matched pattern
+	   > abc  abbbbbc // not matched
+
+
+(a|b){2} -- aa bb - both chars repeated two times.
+
+
+
+
+[adbaby@ADBABY-IN ~]$ ps -e | grep -E "^[[:space:]]+[0-9]{2,4}"
+   54 tty1     00:00:00 ps
+   55 tty1     00:00:00 grep
+[adbaby@ADBABY-IN ~]$
+
+input validation:
+=================
+
+[adbaby@ADBABY-IN shell_program]$ cat -n input_val.sh
+     1  read -p "enter two digits:" n
+     2  echo $n | grep -Eq "^[0-9]{2}$"
+     3
+     4  if [ $? -ne 0 ]
+     5  then
+     6          echo "invalid forat"
+     7  else
+     8          echo "n value is:$n"
+     9  fi
+[adbaby@ADBABY-IN shell_program]$ sh input_val.sh
+enter two digits:1
+invalid forat
+[adbaby@ADBABY-IN shell_program]$ sh input_val.sh
+enter two digits:333
+invalid forat
+[adbaby@ADBABY-IN shell_program]$ sh input_val.sh
+enter two digits:22
+n value is:22
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+url test:
+---------
+[adbaby@ADBABY-IN shell_program]$ cat -n input_url_test.sh
+     1  url_test()
+     2  {
+     3          url=$1
+     4          echo $url | grep -Eq "^(http|https).*(org|com)$"
+     5          if [ $? -eq 0 ];then
+     6                  echo "valid url"
+     7          else
+     8                  echo "invalid url"
+     9          fi
+    10  }
+    11
+    12  if [ $# -eq 0 ];then
+    13          echo "usage:enter a URL name:"
+    14          echo "$0 <url>"
+    15          exit
+    16  fi
+    17  url_test $1
+[adbaby@ADBABY-IN shell_program]$ sh input_url_test.sh
+usage:enter a URL name:
+input_url_test.sh <url>
+[adbaby@ADBABY-IN shell_program]$ sh input_url_test.sh http://www.abc.org
+valid url
+[adbaby@ADBABY-IN shell_program]$ sh input_url_test.sh http://www.abc.com
+valid url
+[adbaby@ADBABY-IN shell_program]$ sh input_url_test.sh http://www.abc.co.in
+invalid url
+[adbaby@ADBABY-IN shell_program]$ sh input_url_test.sh sftp://www.abc.co.in
+invalid url
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+Regx operator or bind operator or match operator =~
+---------------------------------------------------
+like grep command
+
+[[ inputstring =~ regxpattern ]]
+
+[[ -- expanded operator
+
+=~ -- bind operator
+
+[adbaby@ADBABY-IN shell_program]$ [[ "101,raj,abc,sales,pune" =~ sales ]]
+[adbaby@ADBABY-IN shell_program]$ echo $?
+0  <<< pattern matched
+[adbaby@ADBABY-IN shell_program]$ [[ "101,raj,abc,sales,pune" =~ cbc ]]
+[adbaby@ADBABY-IN shell_program]$ echo $?
+1  <<< pattern not matched
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ [[ "101,raj,abc,sales,pune" =~ ^[0-9] ]]
+[adbaby@ADBABY-IN shell_program]$ echo $?
+0
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ [[ "101,raj,abc,sales,pune" =~ ^[0-9]|[a-z]$ ]]
+[adbaby@ADBABY-IN shell_program]$ echo $?
+0
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+grep logic without using grep:
+==============================
+
+
+while read var   |||| read a data from file , here data reading from emp.csv file.
+do
+	if [[ $var =~ sales ]];then
+		echo "$var"
+	fi	
+
+done<emp.csv
+
+-----------------
+
+[adbaby@ADBABY-IN shell_program]$ cat -n grep_logic.sh
+     1  while read var
+     2  do
+     3          if [[ $var =~ sales ]];then
+     4                  echo "$var"
+     5          fi
+     6
+     7  done<emp.csv
+[adbaby@ADBABY-IN shell_program]$ sh grep_logic.sh
+pune,patna,bom,sales
+sales omr cmr opc
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+[adbaby@ADBABY-IN shell_program]$ cat -n grep_fn.sh
+     1  my_grep(){
+     2          if [ $# -ne 2 ];then
+     3                  echo "Usage: $FUNCNAME requires two arguments"
+     4                  echo "$FUNCNAME <input file> <search string>"
+     5                  exit
+     6          fi
+     7
+     8  fname=$1
+     9          if ! [ -f $fname ];then
+    10                  echo "Usage: sorry file $fname is not a reg.file"
+    11                  exit
+    12          fi
+    13
+    14
+    15  pattern=$2
+    16
+    17  while read var
+    18  do
+    19          if [[ $var =~ $pattern ]];then
+    20                  echo "$var"
+    21          fi
+    22
+    23  done <$fname
+    24  }
+    25
+[adbaby@ADBABY-IN shell_program]$
+
+
+[adbaby@ADBABY-IN shell_program]$ . ./grep_fn.sh
+[adbaby@ADBABY-IN shell_program]$ my_grep /etc/passwd bash
+root:x:0:0:root:/root:/bin/bash
+adbaby:x:1000:1000::/home/adbaby:/bin/bash
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+
+time: 1:02:16
+
+
+
+
+
+
+my_grep()
+{
+pattern=$1
+fname=$2
+result_file=$3
+
+while read var
+do
+    if [ $var =~ $pattern ];then
+	echo "$var"
+done<$fname  >$result_file
+
+-------
+
+[adbaby@ADBABY-IN shell_program]$ cat -n grep_fn_rw.sh
+     1  my_grep()
+     2  {
+     3  pattern=$1
+     4  fname=$2
+     5  result_file=$3
+     6
+     7  while read var
+     8  do
+     9          if [[ $var =~ $pattern ]];then
+    10                  echo "$var"
+    11          fi
+    12
+    13  done<$fname  >$result_file
+    14  }
+[adbaby@ADBABY-IN shell_program]$ . ./grep_fn_rw.sh
+[adbaby@ADBABY-IN shell_program]$ my_grep adbaby /etc/passwd grep.log
+[adbaby@ADBABY-IN shell_program]$ cat grep.log
+adbaby:x:1000:1000::/home/adbaby:/bin/bash
+[adbaby@ADBABY-IN shell_program]$
+
+grep -v "^$" <filename>   -- this is remove the empty line and display the content.
+
+bind operator is useful for replacing the grep command logic.
+
+
+logic to ignore empty line: regex sytle. 
+
+grep -v "^$" process.log - this will ignore the empty line.
+
+------------------------------------
+
+while read var
+do
+	if [[ $var =~ ^$ ]]
+	then
+		continue    --- if the pattern is matched we can ignore or we can put not operator.
+	else
+		echo "$var"   -- this will diplay the non empty line to screen.
+	fi
+
+done<process.log    
+
+----------
+
+while read var
+do
+	if ! [[ $var =~ ^$ ]] -- Means not matching with pattern.
+	then
+		echo "$var"   -- this will diplay the non empty line to screen.
+	fi
+
+done<process.log    
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+sed + Regx
+----------
+
+syntax
+--------
+sed -option 'patternAction' inputfile
+
+pattern:
+---------
+	1. Line number or address --> Naction  -- N - is line number.
+	2. text or string         --> /text/action
+
+action:
+-------
+1. print(p)	2. delete(d)		3. insert(i)	4. change(c)
+
+5. write(w)	6. substitute(s) 	7. append(a) 	8. execute(e)
+
+
+
+print 3rd line from emp.csv file.
+
+sed  '3p' emp.csv
+
+sed 
+---
+1. read - read data from file or pipe
+
+2. stores - stores to buffer (pattern buffer)
+
+3. execute - execute sed commands (p w d s i a e) on the buffer // there is no changes on the original file.
+
+4. displa result to the monitor - display executed result to the monitor // buffer will be released.
+
+
+print or write -> -n  option is required
+
+
+print 2nd line content from file.
+
+
+
+[root@ansible-c day3]# cat -n emp.csv 
+     1	ram,sales,pune,1000
+     2	ashi,prod,bglore,2345
+     3	xerox,sales,chennai,45900
+     4	yahoo,prod,pune,32450
+     5	anu,HR,hyd,4560
+     6	biju,prod,bglore,4567
+     7	vijay,hr,chennai,3453
+     8	theeb,sales,hyd,5678
+     9	nithin,prod,pune,1236
+[root@ansible-c day3]# sed '2p' emp.csv 
+ram,sales,pune,1000
+ashi,prod,bglore,2345  ----------- 2nd line is duplicated.
+ashi,prod,bglore,2345
+xerox,sales,chennai,45900
+yahoo,prod,pune,32450
+anu,HR,hyd,4560
+biju,prod,bglore,4567
+vijay,hr,chennai,3453
+theeb,sales,hyd,5678
+nithin,prod,pune,1236
+[root@ansible-c day3]# sed -n '2p' emp.csv   -- used -n option
+ashi,prod,bglore,2345
+[root@ansible-c day3]# 
+
+extended pattern -e option:
+---------------------------
+
+sed -n -e '3p' -e '5p' -e '1p' emp.csv
+
+[root@ansible-c day3]# sed -n -e '3p' -e '5p' -e '1p' emp.csv  --> extended pattern 3rd line to print , extended pattern 5th line to print etc..
+ram,sales,pune,1000
+xerox,sales,chennai,45900
+anu,HR,hyd,4560
+[root@ansible-c day3]#
+
+
+-------------------------------------------------------------------
+
+print(p)
+--------
+Line number based search.
+---------------------------
+
+sed -n 'Np' inputfile.
+        |__print Nth line.
+
+
+
+sed -n 'N,Mp' inputfile 
+	|__it will print from nth line to mth line.like range.
+
+sed -n '3,6p' inputfile
+	|__ 3rd line content to 6th line content.
+
+[root@ansible-c day3]# sed -n '3,6p' emp.csv 
+xerox,sales,chennai,45900
+yahoo,prod,pune,32450
+anu,HR,hyd,4560
+biju,prod,bglore,4567
+[root@ansible-c day3]# 
+
+
+[root@ansible-c day3]# cat -n emp.csv | sed -n '3,6p'
+     3	xerox,sales,chennai,45900
+     4	yahoo,prod,pune,32450
+     5	anu,HR,hyd,4560
+     6	biju,prod,bglore,4567
+[root@ansible-c day3]# 
+
+
+write(w)
+---------
+
+sed -n 'Nw resultfile' inputfile
+
+sed -n '3p' emp.csv >r1.log
+
+sed -n '3w r1.log' emp.csv
+
+
+sed -n '3,6w r2.log' emp.csv  --> write 3rd line to 6th line content to an external file.
+
+
+[root@ansible-c day3]# cat -n emp.csv 
+     1	ram,sales,pune,1000
+     2	ashi,prod,bglore,2345
+     3	xerox,sales,chennai,45900
+     4	yahoo,prod,pune,32450
+     5	anu,HR,hyd,4560
+     6	biju,prod,bglore,4567
+     7	vijay,hr,chennai,3453
+     8	theeb,sales,hyd,5678
+     9	nithin,prod,pune,1236
+[root@ansible-c day3]# sed -n '3,6w r22.log' emp.csv 
+[root@ansible-c day3]# 
+[root@ansible-c day3]# cat r22.log 
+xerox,sales,chennai,45900
+yahoo,prod,pune,32450
+anu,HR,hyd,4560
+biju,prod,bglore,4567
+[root@ansible-c day3]# 
+
+
+sed -n -e '3w r2.log' -e '6w r3.log' emp.csv
+
+sed -n -e '1,3w t1.txt -e '8,15w t2.txt' -e '$w t3.txt' /etc/passwd
+            |
+            1st line to 3rd line content write to t1.txt
+				|_8th line to 15th line content write to t2.txt
+						|__$w - last line content to t3.txt 
+
+[root@ansible-c day3]# sed -n -e '1,3w t1.txt' -e '8,15w t2.txt' -e '$w t3.txt' /etc/passwd
+[root@ansible-c day3]# 
+
+[root@ansible-c day3]# ll t1.txt t2.txt t3.txt 
+-rw-r--r-- 1 root root 105 Nov 25 20:16 t1.txt
+-rw-r--r-- 1 root root 384 Nov 25 20:16 t2.txt
+-rw-r--r-- 1 root root  43 Nov 25 20:16 t3.txt
+[root@ansible-c day3]# 
+
+[root@ansible-c day3]# cat t1.txt
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+[root@ansible-c day3]# cat t2.txt 
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+systemd-coredump:x:999:997:systemd Core Dumper:/:/sbin/nologin
+[root@ansible-c day3]# cat t3.txt 
+adarsh:x:1001:1001::/home/adarsh:/bin/bash
+[root@ansible-c day3]# 
+
+
+[root@ansible-c day3]# ps -e | sed -n '15,20w r11.txt'
+[root@ansible-c day3]# cat r11.txt 
+     17 ?        00:00:00 cpuhp/1
+     18 ?        00:00:00 watchdog/1
+     19 ?        00:00:00 migration/1
+     20 ?        00:00:00 ksoftirqd/1
+     22 ?        00:00:00 kworker/1:0H-events_highpri
+     23 ?        00:00:00 cpuhp/2
+[root@ansible-c day3]# 
+
+-----------------------------------------------------------------------------
+delete(d)
+---------
+opp. of print 
+
+sed 'Nd' filename
+
+file1 			buffer			monitor
+			------			-------
+data1    		data1			data1
+data2						data3
+data3			data3
+------			------			--------
+sed -n '2p' file1  -- print 2nd line data from file1
+data2
+
+
+delete the 2nd line content from file1
+---------------------------------------
+sed '2d' file1
+data1
+data3
+
+delete the content from the buffer space not original data then display to the monitor.
+
+
+[adbaby@ADBABY-IN shell_program]$ cat > file1
+data1
+data2
+data3
+data4
+[adbaby@ADBABY-IN shell_program]$
+[adbaby@ADBABY-IN shell_program]$ sed -n '2p' file1
+data2
+[adbaby@ADBABY-IN shell_program]$ sed  '2d' file1
+data1
+data3
+data4
+[adbaby@ADBABY-IN shell_program]$
+
+
+
+delete first and last line in a file.
+-------------------------------------
+[adbaby@ADBABY-IN shell_program]$ sed -e '1d' -e '$d' file1
+data2
+data3
+[adbaby@ADBABY-IN shell_program]$
+
+delete 1st line to 4th line.
+----------------------------
+
+[root@ansible-c day3]# sed '1,4d' emp.csv
+anu,HR,hyd,4560
+biju,prod,bglore,4567
+vijay,hr,chennai,3453
+theeb,sales,hyd,5678
+nithin,prod,pune,1236
+[root@ansible-c day3]# 
+
+
+
+[root@ansible-c day3]# cat -n emp.csv | sed '1,5d'
+     6	biju,prod,bglore,4567
+     7	vijay,hr,chennai,3453
+     8	theeb,sales,hyd,5678
+     9	nithin,prod,pune,1236
+[root@ansible-c day3]# 
+
+
+
+[root@ansible-c day3]# cat -n emp.csv | sed -e '1,5d' -e '7d'
+     6	biju,prod,bglore,4567
+     8	theeb,sales,hyd,5678
+     9	nithin,prod,pune,1236
+[root@ansible-c day3]# cat -n emp.csv | sed -e '1,5d' -e '7d' -e '$d'
+     6	biju,prod,bglore,4567
+     8	theeb,sales,hyd,5678
+[root@ansible-c day3]# 
+
+
+
+[root@ansible-c day3]# df -Th
+Filesystem          Type      Size  Used Avail Use% Mounted on
+devtmpfs            devtmpfs  2.1G     0  2.1G   0% /dev
+tmpfs               tmpfs     2.1G     0  2.1G   0% /dev/shm
+tmpfs               tmpfs     2.1G  192M  1.9G  10% /run
+tmpfs               tmpfs     2.1G     0  2.1G   0% /sys/fs/cgroup
+/dev/mapper/ol-root xfs        24G   16G  7.5G  68% /
+/dev/sda1           xfs      1014M  530M  485M  53% /boot
+tmpfs               tmpfs     418M   20K  418M   1% /run/user/0
+[root@ansible-c day3]# df -Th | sed -e '1d'
+devtmpfs            devtmpfs  2.1G     0  2.1G   0% /dev
+tmpfs               tmpfs     2.1G     0  2.1G   0% /dev/shm
+tmpfs               tmpfs     2.1G  192M  1.9G  10% /run
+tmpfs               tmpfs     2.1G     0  2.1G   0% /sys/fs/cgroup
+/dev/mapper/ol-root xfs        24G   16G  7.5G  69% /
+/dev/sda1           xfs      1014M  530M  485M  53% /boot
+tmpfs               tmpfs     418M   20K  418M   1% /run/user/0
+[root@ansible-c day3]# df -Th | sed -e '1d' -e '$d'
+devtmpfs            devtmpfs  2.1G     0  2.1G   0% /dev
+tmpfs               tmpfs     2.1G     0  2.1G   0% /dev/shm
+tmpfs               tmpfs     2.1G  192M  1.9G  10% /run
+tmpfs               tmpfs     2.1G     0  2.1G   0% /sys/fs/cgroup
+/dev/mapper/ol-root xfs        24G   16G  7.5G  69% /
+/dev/sda1           xfs      1014M  530M  485M  53% /boot
+[root@ansible-c day3]# 
+
+
+
+time: 30:53
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+time: 54:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
